@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{802D3F6D-7479-48E7-85AE-6DECF93600D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dao", "Dao\Dao.csproj", "{1A772FE1-F48F-4E4B-8DB9-4AC7F0630543}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{35441629-1D13-40C7-8583-E1618B073136}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{802D3F6D-7479-48E7-85AE-6DECF93600D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{802D3F6D-7479-48E7-85AE-6DECF93600D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{802D3F6D-7479-48E7-85AE-6DECF93600D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A772FE1-F48F-4E4B-8DB9-4AC7F0630543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A772FE1-F48F-4E4B-8DB9-4AC7F0630543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A772FE1-F48F-4E4B-8DB9-4AC7F0630543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A772FE1-F48F-4E4B-8DB9-4AC7F0630543}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35441629-1D13-40C7-8583-E1618B073136}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35441629-1D13-40C7-8583-E1618B073136}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35441629-1D13-40C7-8583-E1618B073136}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35441629-1D13-40C7-8583-E1618B073136}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
