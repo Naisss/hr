@@ -8,7 +8,7 @@ using System.Runtime.Remoting.Messaging;
 using Entity;
 namespace Dao
 {
- public   class DaoBase<T> where T : class
+    public   class DaoBase<T> where T : class
     {
 
         HREntities st = new HREntities();

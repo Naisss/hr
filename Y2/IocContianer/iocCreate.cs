@@ -7,36 +7,38 @@ using Unity;
 using Dao;
 using System.Configuration;
 using Microsoft.Practices.Unity.Configuration;
-
-namespace IocCreate
+using Entity;
+using IDao;
+using  IBLL;
+namespace IocContianer
 {
-   //public  class iocCreate
-   // {  
-   //     public static Itext01Dao<text01> text01Dao()
-   //     {
+    public class iocCreate
+    {
+        public static ILoginDao CreateLoginDao()
+        {
 
-   //         UnityContainer ioc = new UnityContainer();
-   //         ioc.RegisterType<Itext01Dao<text01>, text01Dao>();
-   //         return ioc.Resolve<Itext01Dao<text01>>();
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<ILoginDao, LoginDao>();
+            return ioc.Resolve<ILoginDao>();
 
-   //     }
+        }
 
-   //     public static Itext01BLL CreateTextBll()
-   //     {
+        public static T CreateLoginBll<T>(string namew) 
+        {
 
-   //         UnityContainer ioc = new UnityContainer();
-   //         ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
+            UnityContainer ioc = new UnityContainer();
 
-   //         ef.ExeConfigFilename = AppDomain.CurrentDomain.BaseDirectory + "Unity.config";
+            ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
 
-   //         Configuration cf = ConfigurationManager.OpenMappedExeConfiguration(ef, ConfigurationUserLevel.None);
+            ef.ExeConfigFilename = AppDomain.CurrentDomain.BaseDirectory + "Unity.config";
 
-   //         UnityConfigurationSection uc = (UnityConfigurationSection)cf.GetSection("unity");
+            Configuration cf = ConfigurationManager.OpenMappedExeConfiguration(ef, ConfigurationUserLevel.None);
 
-   //         ioc.LoadConfiguration(uc, "containerTow");
+            UnityConfigurationSection uc = (UnityConfigurationSection)cf.GetSection("unity");
 
-   //         return ioc.Resolve<Itext01BLL>("text01BLL");
-   //         //ioc.RegisterType<IBookBLL,>
-   //     }
-   // }
+            ioc.LoadConfiguration(uc, "containerTow");
+
+            return ioc.Resolve<T>(namew);
+        }
+    }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IDao
+namespace IBLL
 {
-    public   interface ILoginDao
+    public interface ILoginBll
     {
         object login(string name, string pwd);//登录
     }

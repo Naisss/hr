@@ -52,7 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DaoBase.cs" />
-    <Compile Include="DBHelper.cs" />
+    <Compile Include="DBhelper.cs" />
+    <Compile Include="LoginDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

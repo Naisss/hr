@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -10,145 +10,158 @@ using System.Threading.Tasks;
 
 namespace Dao
 {
-   public  class DBHelper
+    public  class DBhelper
     {
-        private static SqlConnection GetCon()
+        public static DataTable Select(string sql, string fileName, params SqlParameter[] ps)
         {
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=Test;Persist Security Info=True;User ID=sa;Password=root");
-            return con;
-        }
-        public static DataTable Select(string sql,string dname,params DbParameter[] ps)
-        {
-            SqlConnection con = GetCon();
-            SqlDataAdapter da = new SqlDataAdapter(sql, con);
-            if (ps!=null) {
-                da.SelectCommand.Parameters.AddRange(ps);
-
-            }
-            DataSet dt = new DataSet();
-            try
-            {
-                da.Fill(dt,dname);
-            }
-            catch (Exception ex)
-            {
-                xError( ex);
-                // throw;
-            }
-            return dt.Tables[0];
-        
-
-
-        }
-
-        public static int InsertUpdateDel(string sql,params DbParameter[] ps) {
-            SqlConnection con = GetCon();
-            SqlCommand com = new SqlCommand(sql,con);
-            if (ps!=null) {
-
-                com.Parameters.AddRange(ps);
-            }
-            int i = 0;
-            try
-            {
-                con.Open();
-                i = com.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                xError( ex);
-                //throw;
-            }
-            finally {
-
-
-                con.Close();
-            }
-            return i;
-
-        }
-
-
-        public static object SelectSinger(string sql, params DbParameter[] ps) {
-            SqlConnection con = GetCon();
-            SqlCommand com = new SqlCommand(sql, con);
+            SqlConnection cn = GetConnection();
+            SqlDataAdapter ad = new SqlDataAdapter(sql, cn);
             if (ps != null)
             {
-
-                com.Parameters.AddRange(ps);
-            }
-            object obj = null;
-            try
-            {
-              con.Open();
-                obj = com.ExecuteScalar();
-            }
-            catch (Exception ex)
-            {
-                xError( ex);
-                //throw;
-            }
-            finally
-            {
-
-          con.Close();
-            }
-            return obj;
-
-
-        }
-
-
-        public static SqlDataReader SelectReader(string sql, params DbParameter[] ps) {
-            SqlConnection con = GetCon();
-            SqlCommand com = new SqlCommand(sql,con);
-            if(ps!=null){
-                com.Parameters.AddRange(ps);
-            }
-            SqlDataReader reader = null;
-            try
-            {
-                con.Open();
-                reader = com.ExecuteReader(CommandBehavior.CloseConnection);
-            }
-            catch (Exception ex)
-            {
-                xError( ex);
-                //throw;
-            }
-            return reader;
-        }
-
-        public static DataTable SelectCunCu(string sql,params DbParameter[] ps) {
-            SqlConnection con = GetCon();
-            SqlDataAdapter da = new SqlDataAdapter(sql,con);
-            if (ps!=null) {
-                da.SelectCommand.CommandType = CommandType.StoredProcedure;
-                da.SelectCommand.Parameters.AddRange(ps);
+                ad.SelectCommand.Parameters.AddRange(ps);
             }
             DataTable dt = new DataTable();
             try
             {
-                da.Fill(dt);
+                ad.Fill(dt);
             }
             catch (Exception ex)
             {
-                xError(ex);
-                //throw;
+                WRZ(fileName, ex);
             }
             return dt;
         }
 
+        private static SqlConnection GetConnection()
+        {
+            SqlConnection cn = new SqlConnection("server =.;database =HR;uid = sa;pwd = 123");
+            return cn;
+        }
 
-        public static void xError(Exception ex) {
-            using (StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory+ "/Error.txt",true)) {
+        public static int InsertUpdateDelte(string sql, string fileName, params SqlParameter[] ps)
+        {
+            SqlConnection cn = GetConnection();
 
-                sw.WriteLine("错误信息：" + ex.Message);
-                sw.WriteLine("错误时间:" + DateTime.Now); 
-                sw.WriteLine("----------------------------");
+            SqlCommand cmd = new SqlCommand(sql, cn);
+            if (ps != null)
+            {
+                cmd.Parameters.AddRange(ps);
+            }
+            int result = 0;
+            try
+            {
+                cn.Open();
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                WRZ(fileName, ex);
+            }
+            finally
+            {
+                cn.Close();
+            }
+            return result;
+        }
+
+        public static object SelectSinger(string sql, string fileName, params SqlParameter[] ps)
+        {
+            SqlConnection cn = GetConnection();
+            SqlCommand cmd = new SqlCommand(sql, cn);
+            if (ps != null)
+            {
+                cmd.Parameters.AddRange(ps);
+            }
+            object obj = null;
+            try
+            {
+                cn.Open();
+                obj = cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                WRZ(fileName, ex);
 
             }
+            finally
+            {
+                cn.Close();
+            }
+            return obj;
+        }
 
+        public static SqlDataReader SelectReader(string sql, string fileName, params SqlParameter[] ps)
+        {
+            SqlConnection cn = GetConnection();
+
+            SqlCommand cmd = new SqlCommand(sql, cn);
+            if (ps != null)
+            {
+                cmd.Parameters.AddRange(ps);
+            }
+            SqlDataReader reader = null;
+            try
+            {
+                cn.Open();
+                reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+            catch (Exception ex)
+            {
+                WRZ(fileName, ex);
+
+            }
+            return reader;
+        }
+
+        private static void WRZ(string fileName, Exception ex)
+        {
+            using (StreamWriter sw = new StreamWriter("错误日志.txt", true))
+            {
+                sw.WriteLine("错误信息：" + ex.Message);
+                sw.WriteLine("错误时间:" + DateTime.Now);
+                sw.WriteLine("报错窗体名:" + fileName);
+                sw.WriteLine("----------------------------");
+            }
+        }
+
+        public static DataTable SelectProc(SqlParameter[] ps, string fileName)
+        {
+            SqlConnection cn = GetConnection();
+            string sql = "FY";
+            SqlDataAdapter ad = new SqlDataAdapter(sql, cn);
+            //执行的是存储过程
+            ad.SelectCommand.CommandType = CommandType.StoredProcedure;
+            //命令对象添加参数对象
+            ad.SelectCommand.Parameters.AddRange(ps);
+            DataTable dt = new DataTable();
+            try
+            {
+                ad.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                WRZ(fileName, ex);
+            }
+            return dt;
+        }
+
+        public static DataTable danhao(SqlParameter[] ps,string fileName)
+        {
+            SqlConnection cn = GetConnection();
+            string sql = "Danhao";
+            SqlDataAdapter ad = new SqlDataAdapter(sql, cn);
+            ad.SelectCommand.CommandType = CommandType.StoredProcedure;
+            ad.SelectCommand.Parameters.AddRange(ps);
+            DataTable dt = new DataTable();
+            try
+            {
+                ad.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                WRZ(fileName, ex);
+            }
+            return dt;
         }
     }
 }
