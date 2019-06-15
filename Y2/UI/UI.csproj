@@ -195,6 +195,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\first_kindController.cs" />
+    <Compile Include="Controllers\Major_releaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Filters\CustomerAttribute.cs" />
@@ -684,6 +686,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\first_kind\" />
+    <Folder Include="Views\Major_release\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

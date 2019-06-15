@@ -54,7 +54,14 @@
     <Compile Include="DaoBase.cs" />
     <Compile Include="DBhelper.cs" />
     <Compile Include="LoginDao.cs" />
+    <Compile Include="DBHelper.cs" />
+    <Compile Include="majorDao.cs" />
+    <Compile Include="major_kindDao.cs" />
+    <Compile Include="major_releaseDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="public_charDao.cs" />
+    <Compile Include="second_kindDao.cs" />
+    <Compile Include="third_kindDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj">
