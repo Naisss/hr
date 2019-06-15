@@ -4,22 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity;
-using Dao;
 using System.Configuration;
 using Microsoft.Practices.Unity.Configuration;
 using IDao;
 using Entity;
+using IBLL;
 using Dao;
-namespace IocCreate
-using Entity;
-using IDao;
-using  IBLL;
+
 namespace IocContianer
 {
-    public class iocCreate
-    {
-        public static ILoginDao CreateLoginDao()
-        {
+    
+       
     public class iocCreate 
     {
         public static Imajor_releaseDao<engage_major_release> text01Dao()
@@ -28,23 +23,23 @@ namespace IocContianer
             UnityContainer ioc = new UnityContainer();
             ioc.RegisterType<Imajor_releaseDao<engage_major_release>,major_releaseDao>();
             return ioc.Resolve<Imajor_releaseDao<engage_major_release>>();
+           
+
+        }
+
+        public static ILoginDao CreateLoginDao()
+        {
             UnityContainer ioc = new UnityContainer();
             ioc.RegisterType<ILoginDao, LoginDao>();
             return ioc.Resolve<ILoginDao>();
-
         }
-
-        public static T CreateLoginBll<T>(string namew) 
-        {
-        }
-
-            UnityContainer ioc = new UnityContainer();
+          
         public static T CreateTextBll<T>(string bl)
     {
 
         UnityContainer ioc = new UnityContainer();
         ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
-            ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
+      
 
         ef.ExeConfigFilename = AppDomain.CurrentDomain.BaseDirectory + "Unity.config";
 
@@ -53,12 +48,10 @@ namespace IocContianer
         UnityConfigurationSection uc = (UnityConfigurationSection)cf.GetSection("unity");
 
         ioc.LoadConfiguration(uc, "containerTow");
+                return ioc.Resolve<T>(bl);
 
-            return ioc.Resolve<T>(namew);
-        }
+            }
     }
-        return ioc.Resolve<T>(bl);
-        //ioc.RegisterType<IBookBLL,>
     }
-}
-}
+
+

@@ -52,9 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DaoBase.cs" />
-    <Compile Include="DBhelper.cs" />
-    <Compile Include="LoginDao.cs" />
     <Compile Include="DBHelper.cs" />
+    <Compile Include="LoginDao.cs" />
     <Compile Include="majorDao.cs" />
     <Compile Include="major_kindDao.cs" />
     <Compile Include="major_releaseDao.cs" />
