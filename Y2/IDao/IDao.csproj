@@ -49,8 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILoginDao.cs" />
+    <Compile Include="ImajorDao.cs" />
+    <Compile Include="Imajor_kindDao.cs" />
+    <Compile Include="Imajor_releaseDao.cs" />
+    <Compile Include="Ipublic_charDao.cs" />
+    <Compile Include="Isecond_kindDao.cs" />
+    <Compile Include="Ithird_kindDao.cs" />
     <Compile Include="Ifirst_kindDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TSelectUpdateDelete.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

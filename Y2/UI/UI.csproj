@@ -195,7 +195,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\first_kindController.cs" />
+    <Compile Include="Controllers\Major_releaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Filters\CustomerAttribute.cs" />
+    <Compile Include="Filters\LoginAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -417,6 +421,7 @@
     <Content Include="images\tuopu_32.gif" />
     <Content Include="images\tuopu_33.gif" />
     <Content Include="images\tuopu_34.gif" />
+    <Content Include="index.html" />
     <Content Include="javascript\calendar-ch.js" />
     <Content Include="javascript\calendar\cal.js" />
     <Content Include="javascript\calendar\calendar-win2k-cold-1.css" />
@@ -650,10 +655,13 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.7.2.js" />
+    <Content Include="Scripts\jquery.messager.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\login.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -672,6 +680,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Unity.config" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\first_kind\Index.cshtml" />
     <Content Include="Views\first_kind\Create.cshtml" />
     <Content Include="Views\first_kind\Edit.cshtml" />
