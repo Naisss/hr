@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILoginDao.cs" />
     <Compile Include="ImajorDao.cs" />
     <Compile Include="Imajor_kindDao.cs" />
     <Compile Include="Imajor_releaseDao.cs" />

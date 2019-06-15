@@ -8,5 +8,6 @@ namespace IDao
 {
     public interface Imajor_kindDao<T>:TSelectUpdateDelete<T> where T:class
     {
+        object login(string name, string pwd);//登录
     }
 }

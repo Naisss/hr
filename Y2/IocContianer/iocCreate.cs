@@ -10,55 +10,51 @@ using Microsoft.Practices.Unity.Configuration;
 using IDao;
 using Entity;
 using Dao;
-namespace IocCreate
 using Entity;
 using IDao;
-using  IBLL;
+using IBLL;
 namespace IocContianer
 {
     public class iocCreate
     {
-        public static ILoginDao CreateLoginDao()
-        {
-    public class iocCreate 
-    {
+
         public static Imajor_releaseDao<engage_major_release> text01Dao()
         {
 
             UnityContainer ioc = new UnityContainer();
-            ioc.RegisterType<Imajor_releaseDao<engage_major_release>,major_releaseDao>();
+            ioc.RegisterType<Imajor_releaseDao<engage_major_release>, major_releaseDao>();
             return ioc.Resolve<Imajor_releaseDao<engage_major_release>>();
-            UnityContainer ioc = new UnityContainer();
-            ioc.RegisterType<ILoginDao, LoginDao>();
-            return ioc.Resolve<ILoginDao>();
+
 
         }
 
-        public static T CreateLoginBll<T>(string namew) 
+
+        public static ILoginDao<users> CreateLoginDao()
         {
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<ILoginDao<users>, LoginDao>();
+            return ioc.Resolve<ILoginDao<users>>();
         }
+        public static T CreateTextBll<T>(string bl)
+        {
 
             UnityContainer ioc = new UnityContainer();
-        public static T CreateTextBll<T>(string bl)
-    {
-
-        UnityContainer ioc = new UnityContainer();
-        ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
             ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
 
-        ef.ExeConfigFilename = AppDomain.CurrentDomain.BaseDirectory + "Unity.config";
 
-        Configuration cf = ConfigurationManager.OpenMappedExeConfiguration(ef, ConfigurationUserLevel.None);
+            ef.ExeConfigFilename = AppDomain.CurrentDomain.BaseDirectory + "Unity.config";
 
-        UnityConfigurationSection uc = (UnityConfigurationSection)cf.GetSection("unity");
+            Configuration cf = ConfigurationManager.OpenMappedExeConfiguration(ef, ConfigurationUserLevel.None);
 
-        ioc.LoadConfiguration(uc, "containerTow");
+            UnityConfigurationSection uc = (UnityConfigurationSection)cf.GetSection("unity");
 
-            return ioc.Resolve<T>(namew);
+            ioc.LoadConfiguration(uc, "containerTow");
+
+            return ioc.Resolve<T>(bl);
         }
     }
-        return ioc.Resolve<T>(bl);
-        //ioc.RegisterType<IBookBLL,>
-    }
+
+
 }
 }
+
