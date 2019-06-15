@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity;
+using Dao;
+using Entity;
+using IDao;
+using IBLL;
 using System.Configuration;
 using Microsoft.Practices.Unity.Configuration;
 using IDao;
@@ -67,6 +71,16 @@ namespace IocContianer
           
         public static T CreateTextBll<T>(string bl)
     {
+    public class iocCreate { 
+    // {  
+    public static Ifirst_kindDao text01Dao()
+    {
+
+        UnityContainer ioc = new UnityContainer();
+        ioc.RegisterType<Ifirst_kindDao, first_kindDao>();
+        return ioc.Resolve<Ifirst_kindDao>();
+
+    }
 
         UnityContainer ioc = new UnityContainer();
         ExeConfigurationFileMap ef = new ExeConfigurationFileMap();

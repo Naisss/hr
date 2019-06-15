@@ -638,6 +638,7 @@
     <Content Include="javascript\tree\event.js" />
     <Content Include="javascript\tree\tree.css" />
     <Content Include="javascript\user_add.js" />
+    <Content Include="javascript\vue.js" />
     <Content Include="javascript\winopen\winopen.js" />
     <Content Include="javascript\winopen\winopenm.js" />
     <Content Include="javascript\winopen\winopenn.js" />
@@ -681,7 +682,9 @@
     <Content Include="Unity.config" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Major_release\Index.cshtml" />
+    <Content Include="Views\first_kind\Index.cshtml" />
+    <Content Include="Views\first_kind\Create.cshtml" />
+    <Content Include="Views\first_kind\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
