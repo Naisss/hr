@@ -4,18 +4,21 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Entity;
-
+using BLL;
+using IBLL;
+using IocContianer;
 namespace UI.Controllers
 {
     public class first_kindController : Controller
     {
+        Ifirst_kindBLL fbll = iocCreate.CreateTextBll<Ifirst_kindBLL>("first_kindBLL");
         // GET: first_kind
         public ActionResult Index()
         {
-   
-            return View();
+            List<config_file_first_kind> list = fbll.SelectAll();
+            return View(list);
         }
-
+       
         // GET: first_kind/Details/5
         public ActionResult Details(int id)
         {
@@ -30,8 +33,9 @@ namespace UI.Controllers
 
         // POST: first_kind/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(config_file_first_kind fir)
         {
+            //新增
             try
             {
                 // TODO: Add insert logic here

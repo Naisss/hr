@@ -633,6 +633,7 @@
     <Content Include="javascript\tree\event.js" />
     <Content Include="javascript\tree\tree.css" />
     <Content Include="javascript\user_add.js" />
+    <Content Include="javascript\vue.js" />
     <Content Include="javascript\winopen\winopen.js" />
     <Content Include="javascript\winopen\winopenm.js" />
     <Content Include="javascript\winopen\winopenn.js" />
@@ -671,13 +672,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Unity.config" />
+    <Content Include="Views\first_kind\Index.cshtml" />
+    <Content Include="Views\first_kind\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="css\" />
-    <Folder Include="images\" />
-    <Folder Include="javascript\" />
-    <Folder Include="Views\first_kind\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -688,9 +687,29 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{35441629-1d13-40c7-8583-e1618b073136}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dao\Dao.csproj">
+      <Project>{1a772fe1-f48f-4e4b-8db9-4ac7f0630543}</Project>
+      <Name>Dao</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entity\Entity.csproj">
       <Project>{A74FC79A-B2C3-4AB6-B5DA-EDE4B2CE97D7}</Project>
       <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBLL\IBLL.csproj">
+      <Project>{3692bc2c-3c87-451d-8748-269ed03ca4ad}</Project>
+      <Name>IBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDao\IDao.csproj">
+      <Project>{7826da70-3f18-49c4-8177-9b8873f41f14}</Project>
+      <Name>IDao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IocContianer\IocContianer.csproj">
+      <Project>{723e430e-d5f9-4225-add6-4765652201b3}</Project>
+      <Name>IocContianer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
