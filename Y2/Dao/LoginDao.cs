@@ -7,7 +7,7 @@ using IDao;
 using Entity;
 namespace Dao
 {
-      public  class LoginDao: DaoBase<users>,ILoginDao<users>
+      public  class LoginDao: DaoBase<users>,ILoginDao
     {
        public object login(string name, string pwd)
         {
