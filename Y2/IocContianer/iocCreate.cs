@@ -7,36 +7,38 @@ using Unity;
 using Dao;
 using System.Configuration;
 using Microsoft.Practices.Unity.Configuration;
-
+using IDao;
+using Entity;
+using Dao;
 namespace IocCreate
 {
-   //public  class iocCreate
-   // {  
-   //     public static Itext01Dao<text01> text01Dao()
-   //     {
+    public class iocCreate 
+    {
+        public static Imajor_releaseDao<engage_major_release> text01Dao()
+        {
 
-   //         UnityContainer ioc = new UnityContainer();
-   //         ioc.RegisterType<Itext01Dao<text01>, text01Dao>();
-   //         return ioc.Resolve<Itext01Dao<text01>>();
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Imajor_releaseDao<engage_major_release>,major_releaseDao>();
+            return ioc.Resolve<Imajor_releaseDao<engage_major_release>>();
 
-   //     }
+        }
 
-   //     public static Itext01BLL CreateTextBll()
-   //     {
+        public static T CreateTextBll<T>(string bl)
+    {
 
-   //         UnityContainer ioc = new UnityContainer();
-   //         ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
+        UnityContainer ioc = new UnityContainer();
+        ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
 
-   //         ef.ExeConfigFilename = AppDomain.CurrentDomain.BaseDirectory + "Unity.config";
+        ef.ExeConfigFilename = AppDomain.CurrentDomain.BaseDirectory + "Unity.config";
 
-   //         Configuration cf = ConfigurationManager.OpenMappedExeConfiguration(ef, ConfigurationUserLevel.None);
+        Configuration cf = ConfigurationManager.OpenMappedExeConfiguration(ef, ConfigurationUserLevel.None);
 
-   //         UnityConfigurationSection uc = (UnityConfigurationSection)cf.GetSection("unity");
+        UnityConfigurationSection uc = (UnityConfigurationSection)cf.GetSection("unity");
 
-   //         ioc.LoadConfiguration(uc, "containerTow");
+        ioc.LoadConfiguration(uc, "containerTow");
 
-   //         return ioc.Resolve<Itext01BLL>("text01BLL");
-   //         //ioc.RegisterType<IBookBLL,>
-   //     }
-   // }
+        return ioc.Resolve<T>(bl);
+        //ioc.RegisterType<IBookBLL,>
+    }
+}
 }
