@@ -674,6 +674,7 @@
     <Content Include="Unity.config" />
     <Content Include="Views\first_kind\Index.cshtml" />
     <Content Include="Views\first_kind\Create.cshtml" />
+    <Content Include="Views\first_kind\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

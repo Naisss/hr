@@ -32,7 +32,7 @@
             <tr>
                 <td align="right">
                     <input type="button" value="添加" class="BUTTON_STYLE1"
-                           onclick="window.location.href='Create'" />
+                           onclick="window.location.href = '/first_kind/Create'" />
                 </td>
             </tr>
         </table>
@@ -67,8 +67,8 @@
                     <td>@dr.first_kind_salary_id </td>
                     <td>@dr.first_kind_sale_id</td>
            
-                    <td> @Html.ActionLink("变更", "SelectId", new { id = @dr.ffk_id })</td>
-                    <td>@Html.ActionLink("删除", "Del", new { id = dr.ffk_id }, new { onclick = "return confirm('亲，你确定要删除吗？')" })</td>
+                    <td> @Html.ActionLink("变更", "Edit", new { id = @dr.ffk_id })</td>
+                    <td>@Html.ActionLink("删除", "Delete", new { id = dr.ffk_id }, new { onclick = "return confirm('亲，你确定要删除吗？')" })</td>
                 </tr>
             }
 

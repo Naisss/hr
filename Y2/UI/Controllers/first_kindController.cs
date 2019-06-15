@@ -33,47 +33,72 @@ namespace UI.Controllers
 
         // POST: first_kind/Create
         [HttpPost]
+        [ActionName("add")]
         public ActionResult Create(config_file_first_kind fir)
         {
             //新增
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                List<config_file_first_kind> xx = fbll.SelectAll();
+                config_file_first_kind cfk = xx[xx.Count - 1];
+                fir.first_kind_id = (Convert.ToInt32(cfk.first_kind_id) + 1001).ToString().Substring(2);
 
-                return RedirectToAction("Index");
+                int num = fbll.Insert(fir);
+                if (num > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View();
+                }
             }
-            catch
+            else
             {
                 return View();
             }
         }
-
+        [HttpGet]
         // GET: first_kind/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(short id)
         {
-            return View();
+            config_file_first_kind li = fbll.selectWhere(e => e.ffk_id == id).FirstOrDefault();
+            
+            return View(li);
         }
 
         // POST: first_kind/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+      
+        public ActionResult Edit(config_file_first_kind t)
         {
-            try
+            int num = fbll.Update(t);
+            if (num > 0)
             {
-                // TODO: Add update logic here
-
                 return RedirectToAction("Index");
             }
-            catch
+            else
             {
-                return View();
+                return View(num);
             }
         }
 
         // GET: first_kind/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(short id)
         {
-            return View();
+            config_file_first_kind stu = new config_file_first_kind()
+            {
+                ffk_id = id
+            };
+            int num = fbll.Del(stu);
+            if (num > 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(num);
+            }
         }
 
         // POST: first_kind/Delete/5
