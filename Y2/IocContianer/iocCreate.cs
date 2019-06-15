@@ -27,11 +27,11 @@ namespace IocContianer
 
         }
 
-        public static ILoginDao CreateLoginDao()
+        public static ILoginDao<users> CreateLoginDao()
         {
             UnityContainer ioc = new UnityContainer();
-            ioc.RegisterType<ILoginDao, LoginDao>();
-            return ioc.Resolve<ILoginDao>();
+            ioc.RegisterType<ILoginDao<users>, LoginDao>();
+            return ioc.Resolve<ILoginDao<users>>();
         }
           
         public static T CreateTextBll<T>(string bl)
