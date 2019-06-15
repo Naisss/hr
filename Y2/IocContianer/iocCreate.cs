@@ -17,15 +17,15 @@ using Dao;
 
 namespace IocContianer
 {
-    
-       
-    public class iocCreate 
+
+
+    public class iocCreate
     {
         //发布登记
         public static Imajor_releaseDao<engage_major_release> text01Dao()
         {
             UnityContainer ioc = new UnityContainer();
-            ioc.RegisterType<Imajor_releaseDao<engage_major_release>,major_releaseDao>();
+            ioc.RegisterType<Imajor_releaseDao<engage_major_release>, major_releaseDao>();
             return ioc.Resolve<Imajor_releaseDao<engage_major_release>>();
         }
         //第二阶段
@@ -68,35 +68,36 @@ namespace IocContianer
             ioc.RegisterType<ILoginDao, LoginDao>();
             return ioc.Resolve<ILoginDao>();
         }
-          
+
         public static T CreateTextBll<T>(string bl)
-    {
-    public class iocCreate { 
-    // {  
-    public static Ifirst_kindDao text01Dao()
-    {
+        {
+            UnityContainer ioc = new UnityContainer();
+            ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
 
-        UnityContainer ioc = new UnityContainer();
-        ioc.RegisterType<Ifirst_kindDao, first_kindDao>();
-        return ioc.Resolve<Ifirst_kindDao>();
+
+            ef.ExeConfigFilename = AppDomain.CurrentDomain.BaseDirectory + "Unity.config";
+
+            Configuration cf = ConfigurationManager.OpenMappedExeConfiguration(ef, ConfigurationUserLevel.None);
+
+            UnityConfigurationSection uc = (UnityConfigurationSection)cf.GetSection("unity");
+
+            ioc.LoadConfiguration(uc, "containerTow");
+            return ioc.Resolve<T>(bl);
+        }
+
+        public static Ifirst_kindDao text01Dao1()
+        {
+
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Ifirst_kindDao, first_kindDao>();
+            return ioc.Resolve<Ifirst_kindDao>();
+
+        }
+
+
+
 
     }
-
-        UnityContainer ioc = new UnityContainer();
-        ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
-      
-
-        ef.ExeConfigFilename = AppDomain.CurrentDomain.BaseDirectory + "Unity.config";
-
-        Configuration cf = ConfigurationManager.OpenMappedExeConfiguration(ef, ConfigurationUserLevel.None);
-
-        UnityConfigurationSection uc = (UnityConfigurationSection)cf.GetSection("unity");
-
-        ioc.LoadConfiguration(uc, "containerTow");
-                return ioc.Resolve<T>(bl);
-
-            }
-    }
-    }
+}
 
 

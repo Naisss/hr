@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="DaoBase.cs" />
     <Compile Include="DBhelper.cs" />
+    <Compile Include="first_kindDao.cs" />
     <Compile Include="LoginDao.cs" />
     <Compile Include="majorDao.cs" />
     <Compile Include="major_kindDao.cs" />

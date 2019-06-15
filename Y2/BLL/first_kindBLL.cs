@@ -13,7 +13,7 @@ namespace BLL
 {
     public class first_kindBLL : Ifirst_kindBLL
     {
-        Ifirst_kindDao dao = iocCreate.text01Dao();
+        Ifirst_kindDao dao = iocCreate.text01Dao1();
 
         public int Del(config_file_first_kind t)
         {

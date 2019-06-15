@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ifirst_kindBLL.cs" />
     <Compile Include="ImajorBLL.cs" />
     <Compile Include="Imajor_kindBLL.cs" />
     <Compile Include="Imajor_releaseBLL.cs" />
