@@ -10,10 +10,7 @@ using IDao;
 using IBLL;
 using System.Configuration;
 using Microsoft.Practices.Unity.Configuration;
-using IDao;
-using Entity;
-using IBLL;
-using Dao;
+
 
 namespace IocContianer
 {
@@ -37,32 +34,33 @@ namespace IocContianer
             ioc.RegisterType<ILoginDao<users>, LoginDao>();
             return ioc.Resolve<ILoginDao<users>>();
         }
-          
+
         public static T CreateTextBll<T>(string bl)
-    {
-    public class iocCreate { 
-    // {  
-    public static Ifirst_kindDao text01Dao()
-    {
+        {
+
+            UnityContainer ioc = new UnityContainer();
+            ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
+
+
+            ef.ExeConfigFilename = AppDomain.CurrentDomain.BaseDirectory + "Unity.config";
+
+            Configuration cf = ConfigurationManager.OpenMappedExeConfiguration(ef, ConfigurationUserLevel.None);
+
+            UnityConfigurationSection uc = (UnityConfigurationSection)cf.GetSection("unity");
+
+            ioc.LoadConfiguration(uc, "containerTow");
+            return ioc.Resolve<T>(bl);
+
+        }
+        public static Ifirst_kindDao text01Dao1()
+     {
 
         UnityContainer ioc = new UnityContainer();
         ioc.RegisterType<Ifirst_kindDao, first_kindDao>();
+
         return ioc.Resolve<Ifirst_kindDao>();
 
-    }
-
-        UnityContainer ioc = new UnityContainer();
-        ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
-      
-
-        ef.ExeConfigFilename = AppDomain.CurrentDomain.BaseDirectory + "Unity.config";
-
-        Configuration cf = ConfigurationManager.OpenMappedExeConfiguration(ef, ConfigurationUserLevel.None);
-
-        UnityConfigurationSection uc = (UnityConfigurationSection)cf.GetSection("unity");
-
-        ioc.LoadConfiguration(uc, "containerTow");
-                return ioc.Resolve<T>(bl);
+     }
 
             }
     }
