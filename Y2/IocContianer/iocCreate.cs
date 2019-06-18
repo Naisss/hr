@@ -33,7 +33,8 @@ namespace IocContianer
             ioc.RegisterType<ILoginDao, LoginDao>();
             return ioc.Resolve<ILoginDao>();
         }
-          
+      
+
         public static T CreateTextBll<T>(string bl)
     {
 

@@ -61,6 +61,7 @@
     <Compile Include="public_charDao.cs" />
     <Compile Include="second_kindDao.cs" />
     <Compile Include="third_kindDao.cs" />
+    <Compile Include="UsersDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj">

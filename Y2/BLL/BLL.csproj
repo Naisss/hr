@@ -57,6 +57,7 @@
     <Compile Include="public_charBLL.cs" />
     <Compile Include="second_kindBLL.cs" />
     <Compile Include="third_kindBLL.cs" />
+    <Compile Include="UsersBll.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
