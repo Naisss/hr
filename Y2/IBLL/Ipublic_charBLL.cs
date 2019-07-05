@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBLL
 {
-    public interface Ipublic_charBLL
-    {
-    }
+    //public interface Ipublic_charBLL
+    //{
+    //}
 }

@@ -7,7 +7,7 @@ using IDao;
 using Entity;
 namespace Dao
 {
-    public class majorDao:DaoBase<config_major>,ImajorDao<config_major>
-    {
-    }
+    //public class majorDao:DaoBase<config_major>,ImajorDao<config_major>
+    //{
+    //}
 }

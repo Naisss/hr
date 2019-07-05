@@ -10,8 +10,8 @@ using IBLL;
 using IDao;
 namespace BLL
 {
-    public class major_releaseBLL:Imajor_releaseBLL
-    {
+    //public class major_releaseBLL:Imajor_releaseBLL
+    //{
         
-    }
+    //}
 }

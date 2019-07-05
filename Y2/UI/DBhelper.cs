@@ -108,7 +108,6 @@ namespace UI
             catch (Exception ex)
             {
                 WRZ(fileName, ex);
-
             }
             return reader;
         }
@@ -127,7 +126,7 @@ namespace UI
         public static DataTable SelectProc(SqlParameter[] ps, string fileName)
         {
             SqlConnection cn = GetConnection();
-            string sql = "FY";
+            string sql = "YonghuFY";
             SqlDataAdapter ad = new SqlDataAdapter(sql, cn);
             //执行的是存储过程
             ad.SelectCommand.CommandType = CommandType.StoredProcedure;

@@ -8,7 +8,7 @@ using IDao;
 using IBLL;
 namespace BLL
 {
-    public class public_charBLL:Ipublic_charBLL
-    {
-    }
+    //public class public_charBLL:Ipublic_charBLL
+    //{
+    //}
 }

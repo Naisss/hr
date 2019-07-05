@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using Entity;
 namespace IDao
 {
-    // public  interface IUsersDao<T> where T :class
+    //public interface IUsersDao<T> where T : class
     //{
     //    List<T> selectWhere(Expression<Func<T, bool>> where);
     //}

@@ -8,7 +8,7 @@ using IDao;
 
 namespace Dao
 {
-   public  class second_kindDao:DaoBase<config_file_second_kind>,Isecond_kindDao<config_file_second_kind>
-    {
-    }
+   //public  class second_kindDao:DaoBase<config_file_second_kind>,Isecond_kindDao<config_file_second_kind>
+   // {
+   // }
 }

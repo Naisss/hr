@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBLL
 {
-    public interface Imajor_releaseBLL
-    {
-    }
+    //public interface Imajor_releaseBLL
+    //{
+    //}
 }

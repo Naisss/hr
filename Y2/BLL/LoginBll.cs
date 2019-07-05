@@ -17,7 +17,7 @@ namespace BLL
         }
         public object u_roleidSelect(string name, string pwd)
         {
-            return id.login(name, pwd);
+            return id.u_roleidSelect(name, pwd);
         }
     }
 }

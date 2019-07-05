@@ -1,7 +1,7 @@
 ﻿
-@{
+@*@{
     Layout = null;
-}
+}*@
 
 <!DOCTYPE html>
 
@@ -25,8 +25,6 @@
                     var text = node.text;
                     var url = node.QuanURL;
                     if (url != null) {
-                        //页面级
-                        //如果页面有，就选中，否则就添加
                         if ($("#tabs").tabs('exists', text)) {
                             $("#tabs").tabs('select', text)
                         } else {

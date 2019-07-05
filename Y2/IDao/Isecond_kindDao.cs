@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IDao
 {
-    public interface Isecond_kindDao<T>:TSelectUpdateDelete<T>where T:class
-    {
-    }
+    //public interface Isecond_kindDao<T>:TSelectUpdateDelete<T>where T:class
+    //{
+    //}
 }
