@@ -62,6 +62,7 @@
     <Compile Include="Isecond_kindBLL.cs" />
     <Compile Include="Ithird_kindBLL.cs" />
     <Compile Include="ILoginBll.cs" />
+    <Compile Include="IUsersBll.cs" />
     <Compile Include="IusersBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -83,6 +84,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{a74fc79a-b2c3-4ab6-b5da-ede4b2ce97d7}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

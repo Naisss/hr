@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace IDao
 {
-    public interface Imajor_releaseDao<T>:TSelectUpdateDelete<T> where T:class
-    {
+    //public interface Imajor_releaseDao<T>:TSelectUpdateDelete<T> where T:class
+    //{
 
 
-    }
+    //}
 }

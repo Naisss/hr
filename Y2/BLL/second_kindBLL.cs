@@ -11,9 +11,9 @@ using System.Linq.Expressions;
 
 namespace BLL
 {
-    public class second_kindBLL:Isecond_kindBLL
-    {
-        Isecond_kindDao<config_file_second_kind> s = iocCreate.second_kindDao();
+    //public class second_kindBLL:Isecond_kindBLL
+    //{
+    //    Isecond_kindDao<config_file_second_kind> s = iocCreate.second_kindDao();
 
         //二级阶段
         public List<config_file_second_kind> Select() {

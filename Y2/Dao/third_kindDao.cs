@@ -8,7 +8,7 @@ using Entity;
 
 namespace Dao
 {
-    public class third_kindDao:DaoBase<config_file_third_kind>,Ithird_kindDao<config_file_third_kind>
-    {
-    }
+    //public class third_kindDao:DaoBase<config_file_third_kind>,Ithird_kindDao<config_file_third_kind>
+    //{
+    //}
 }

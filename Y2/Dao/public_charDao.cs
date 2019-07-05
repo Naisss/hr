@@ -7,7 +7,7 @@ using IDao;
 using Entity;
 namespace Dao
 {
-  public   class public_charDao:DaoBase<config_public_char>,Ipublic_charDao<config_public_char>
-    {
-    }
+  //public   class public_charDao:DaoBase<config_public_char>,Ipublic_charDao<config_public_char>
+  //  {
+  //  }
 }

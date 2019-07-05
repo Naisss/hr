@@ -11,7 +11,7 @@ namespace Entity
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class major_change
     {
         public short mch_id { get; set; }
@@ -50,5 +50,11 @@ namespace Entity
         public string checker { get; set; }
         public Nullable<System.DateTime> regist_time { get; set; }
         public Nullable<System.DateTime> check_time { get; set; }
+
+        public Nullable<System.DateTime> create_time { get; set; }//建档时间
+
+        public Nullable<System.DateTime> startDate { get; set; }
+
+        public Nullable<System.DateTime> endDate { get; set; }
     }
 }

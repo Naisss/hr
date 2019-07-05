@@ -17,9 +17,9 @@ using Dao;
 
 namespace IocContianer
 {
-
-
-    public class iocCreate
+    
+       
+    public class iocCreate 
     {
         //发布登记
         public static Imajor_releaseDao<engage_major_release> text01Dao()
@@ -35,7 +35,7 @@ namespace IocContianer
             ioc.RegisterType<Isecond_kindDao<config_file_second_kind>, second_kindDao>();
             return ioc.Resolve<Isecond_kindDao<config_file_second_kind>>();
         }
-
+           
         //第三阶段
         public static Ithird_kindDao<config_file_third_kind> third_kindDao()
         {
@@ -152,28 +152,38 @@ namespace IocContianer
         }
 
         //bll通用
+          
+
         public static T CreateTextBll<T>(string bl)
-        {
-            UnityContainer ioc = new UnityContainer();
-            ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
+    {
+        UnityContainer ioc = new UnityContainer();
+        ExeConfigurationFileMap ef = new ExeConfigurationFileMap();
+      
 
+        ef.ExeConfigFilename = AppDomain.CurrentDomain.BaseDirectory + "Unity.config";
 
-            ef.ExeConfigFilename = AppDomain.CurrentDomain.BaseDirectory + "Unity.config";
+        Configuration cf = ConfigurationManager.OpenMappedExeConfiguration(ef, ConfigurationUserLevel.None);
 
-            Configuration cf = ConfigurationManager.OpenMappedExeConfiguration(ef, ConfigurationUserLevel.None);
+        UnityConfigurationSection uc = (UnityConfigurationSection)cf.GetSection("unity");
 
-            UnityConfigurationSection uc = (UnityConfigurationSection)cf.GetSection("unity");
-
-            ioc.LoadConfiguration(uc, "containerTow");
-            return ioc.Resolve<T>(bl);
+        ioc.LoadConfiguration(uc, "containerTow");
+                return ioc.Resolve<T>(bl);
         }
 
+        public static Ifirst_kindDao text01Dao1()
+        {
+
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Ifirst_kindDao, first_kindDao>();
+            return ioc.Resolve<Ifirst_kindDao>();
+
+            }
        
 
 
 
 
     }
-}
+    }
 
 

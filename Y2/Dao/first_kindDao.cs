@@ -7,8 +7,8 @@ using Entity;
 using IDao;
 namespace Dao
 {
-    public class first_kindDao : DaoBase<config_file_first_kind>, Ifirst_kindDao
-    {
+    //public class first_kindDao : DaoBase<config_file_first_kind>, Ifirst_kindDao
+    //{
        
-    }
+    //}
 }

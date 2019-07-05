@@ -1,0 +1,279 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="~/javascript/jquery-1.7.2.js"></script>
+    <link href="~/css/table.css" rel="stylesheet" />
+</head>
+
+<body>
+        <table width="100%">
+            <tr>
+                <td>
+                    <font color="black">您正在做的业务是：人力资源--调动管理--调动审核列表</font>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <font color="black" >
+                        当前待复核的调动人数:<label id="people"></label>
+                        例
+                   </font></td>
+            </tr>
+        </table>
+        <table width="100%" border="1" cellpadding=0 cellspacing=1
+               bordercolorlight=#848284 bordercolordark=#eeeeee
+               class="TABLE_STYLE1" id="tb">
+            <tr height="21">
+                <td width="19%" class="TD_STYLE1">
+                    I级机构
+                </td>
+                <td width="19%" class="TD_STYLE1">
+                    II级机构
+                </td>
+                <td width="19%" class="TD_STYLE1">
+                    Ⅲ级机构
+                </td>
+                <td width="19%" class="TD_STYLE1">
+                    薪酬标准
+                </td>
+                <td width="19%" class="TD_STYLE1">
+                    名字
+                </td>
+                <td width="5%" class="TD_STYLE1">
+                    审核
+                </td>
+            </tr>
+        </table>
+            <p>
+                <div align="center" style="font-size: 18px;color: gray">
+                    &nbsp;&nbsp;总数：
+                    <font style="color: maroon;font-weight: bold;" id="rows"></font>
+                    例
+                    &nbsp;&nbsp;&nbsp;
+                    每页显示 <font style="color: maroon;font-weight: bold;" id="count"></font>
+                    条
+                    &nbsp;&nbsp;&nbsp;
+                    当前第 <font style="color: maroon;font-weight: bold;" id="page"></font>
+                    页
+                    &nbsp;&nbsp;&nbsp;共
+                    <font style="color: maroon;font-weight: bold;" id="pages"></font>
+                    页
+                    <a style="color: navy;font-weight: bold" href="javascript:doPage(1)" id="first">首页</a>
+
+                    <a style="color: navy;font-weight: bold"
+                       href="javascript:doPage(0)" id="prev">上一页</a>
+
+                    <a style="color: navy;font-weight: bold"
+                       href="javascript:doPage(2)" id="next">下一页</a>
+
+                    <a style="color: navy;font-weight: bold"
+                       href="javascript:doPage(1)" id="last">末页</a>
+                    &nbsp;&nbsp;&nbsp;跳到第
+                    <input id="pages" type="text" class=input1 size=1>
+                    页&nbsp;&nbsp;
+                    <input type="image"  id="="tiao"  onclick="dopagebybutton()" src="../../images/go.bmp" width=18 height=18 border=0>
+
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        var currentPage = 1;
+                             $.ajax({
+                                 url: "/major_change/SH1/null?currentPage=" + currentPage,
+                                 type: "post",
+                                 success: function (msg) {
+                                     var di = eval("(" + msg + ")");
+                                     var list = di["list"];
+                                     var pages = di["pages"];
+                                     var row = di["rows"];
+                                     $("#tb tr:gt(0)").remove();
+                                     for (var item in list) {
+                                         $tr = $("<tr></tr>");
+                                         $td1 = $('<td class="TD_STYLE2">' + list[item].first_kind_name + '</td>');
+                                         $td2 = $('<td class="TD_STYLE2">' + list[item].second_kind_name + '</td>');
+                                         $td3 = $('<td class="TD_STYLE2">' + list[item].third_kind_name + '</td>');
+                                         $td4 = $('<td class="TD_STYLE2">' + list[item].salary_standard_name + '</td>');
+                                         $td5 = $('<td class="TD_STYLE2">' + list[item].human_name + '</td>');
+                                         $td6 = $("<td class='TD_STYLE2'> <a href='/major_change/DDSH/" + list[item].mch_id + "'>审核</a></td>");
+                                         $tr.append($td1, $td2, $td3, $td4, $td5, $td6);
+                                         $("#tb").append($tr);
+                                         $("#page").text(currentPage);
+                                         $("#rows").text(row);
+                                         $("#count").text(2);
+                                         $("#pages").text(pages);
+                                         $("#people").text(row);
+                                     }
+                                 }
+                             })
+                        $("#next").click(function () {
+                            if(currentPage<pages){
+                                currentPage++;
+                                $.ajax({
+                                    url: "/major_change/SH1/null?currentPage=" + currentPage,
+                                    type: "post",
+                                    success: function (msg) {
+                                        var di = eval("(" + msg + ")");
+                                        var list = di["list"];
+                                        var pages = di["pages"];
+                                        var row = di["rows"];
+                                        $("#tb tr:gt(0)").remove();
+                                        for (var item in list) {
+                                            $tr = $("<tr></tr>");
+                                            $td1 = $('<td class="TD_STYLE2">' + list[item].first_kind_name + '</td>');
+                                            $td2 = $('<td class="TD_STYLE2">' + list[item].second_kind_name + '</td>');
+                                            $td3 = $('<td class="TD_STYLE2">' + list[item].third_kind_name + '</td>');
+                                            $td4 = $('<td class="TD_STYLE2">' + list[item].salary_standard_name + '</td>');
+                                            $td5 = $('<td class="TD_STYLE2">' + list[item].human_name + '</td>');
+                                            $td6 = $("<td class='TD_STYLE2'> <a href='/major_change/DDSH/" + list[item].mch_id + "'>审核</a></td>");
+                                            $tr.append($td1, $td2, $td3, $td4, $td5, $td6);
+                                            $("#tb").append($tr);
+                                            $("#page").text(currentPage);
+                                            $("#rows").text(row);
+                                            $("#count").text(2);
+                                            $("#pages").text(pages);
+                                            $("#people").text(row);
+                                        }
+                                    }
+                                })
+                            }       
+                        })
+                        $("#prev").click(function () {
+                            if(currentPage>1){
+                                currentPage--;
+                                $.ajax({
+                                    url: "/major_change/SH1/null?currentPage=" + currentPage,
+                                    type: "post",
+                                    success: function (msg) {
+                                        var di = eval("(" + msg + ")");
+                                        var list = di["list"];
+                                        var pages = di["pages"];
+                                        var row = di["rows"];
+                                        $("#tb tr:gt(0)").remove();
+                                        for (var item in list) {
+                                            $tr = $("<tr></tr>");
+                                            $td1 = $('<td class="TD_STYLE2">' + list[item].first_kind_name + '</td>');
+                                            $td2 = $('<td class="TD_STYLE2">' + list[item].second_kind_name + '</td>');
+                                            $td3 = $('<td class="TD_STYLE2">' + list[item].third_kind_name + '</td>');
+                                            $td4 = $('<td class="TD_STYLE2">' + list[item].salary_standard_name + '</td>');
+                                            $td5 = $('<td class="TD_STYLE2">' + list[item].human_name + '</td>');
+                                            $td6 = $("<td class='TD_STYLE2'> <a href='/major_change/DDSH/" + list[item].mch_id + "'>审核</a></td>");
+                                            $tr.append($td1, $td2, $td3, $td4, $td5, $td6);
+                                            $("#tb").append($tr);
+                                            $("#page").text(currentPage);
+                                            $("#rows").text(row);
+                                            $("#count").text(2);
+                                            $("#pages").text(pages);
+                                            $("#people").text(row);
+                                        }
+                                    }
+                                })
+                            }
+                        });
+                        $("#first").click(function () {
+                            currentPage = 1;
+                            $.ajax({
+                                url: "/major_change/SH1/null?currentPage=" + currentPage,
+                                type: "post",
+                                success: function (msg) {
+                                    var di = eval("(" + msg + ")");
+                                    var list = di["list"];
+                                    var pages = di["pages"];
+                                    var row = di["rows"];
+                                    $("#tb tr:gt(0)").remove();
+                                    for (var item in list) {
+                                        $tr = $("<tr></tr>");
+                                        $td1 = $('<td class="TD_STYLE2">' + list[item].first_kind_name + '</td>');
+                                        $td2 = $('<td class="TD_STYLE2">' + list[item].second_kind_name + '</td>');
+                                        $td3 = $('<td class="TD_STYLE2">' + list[item].third_kind_name + '</td>');
+                                        $td4 = $('<td class="TD_STYLE2">' + list[item].salary_standard_name + '</td>');
+                                        $td5 = $('<td class="TD_STYLE2">' + list[item].human_name + '</td>');
+                                        $td6 = $("<td class='TD_STYLE2'> <a href='/major_change/DDSH/" + list[item].mch_id + "'>审核</a></td>");
+                                        $tr.append($td1, $td2, $td3, $td4, $td5, $td6);
+                                        $("#tb").append($tr);
+                                        $("#page").text(currentPage);
+                                        $("#rows").text(row);
+                                        $("#count").text(2);
+                                        $("#pages").text(pages);
+                                        $("#people").text(row);
+                                    }
+                                }
+                            })
+                        });
+                        $("#last").click(function () {
+                            currentPage =pages;
+                            $.ajax({
+                                url: "/major_change/SH1/null?currentPage=" + currentPage,
+                                type: "post",
+                                success: function (msg) {
+                                    var di = eval("(" + msg + ")");
+                                    var list = di["list"];
+                                    var pages = di["pages"];
+                                    var row = di["rows"];
+                                    $("#tb tr:gt(0)").remove();
+                                    for (var item in list) {
+                                        $tr = $("<tr></tr>");
+                                        $td1 = $('<td class="TD_STYLE2">' + list[item].first_kind_name + '</td>');
+                                        $td2 = $('<td class="TD_STYLE2">' + list[item].second_kind_name + '</td>');
+                                        $td3 = $('<td class="TD_STYLE2">' + list[item].third_kind_name + '</td>');
+                                        $td4 = $('<td class="TD_STYLE2">' + list[item].salary_standard_name + '</td>');
+                                        $td5 = $('<td class="TD_STYLE2">' + list[item].human_name + '</td>');
+                                        $td6 = $("<td class='TD_STYLE2'> <a href='/major_change/DDSH/" + list[item].mch_id + "'>审核</a></td>");
+                                        $tr.append($td1, $td2, $td3, $td4, $td5, $td6);
+                                        $("#tb").append($tr);
+                                        $("#page").text(currentPage);
+                                        $("#rows").text(row);
+                                        $("#count").text(2);
+                                        $("#pages").text(pages);
+                                        $("#people").text(row);
+                                    }
+                                }
+                            })
+                        })
+                        $("#tiao").click(function () {
+                            currentPage = $("#pages").val();
+                            alert(currentPage);
+                            $.ajax({
+                                url: "/major_change/SH1/null?currentPage=" + currentPage,
+                                type: "post",
+                                success: function (msg) {
+                                    var di = eval("(" + msg + ")");
+                                    var list = di["list"];
+                                    var pages = di["pages"];
+                                    var row = di["rows"];
+                                    $("#tb tr:gt(0)").remove();
+                                    for (var item in list) {
+                                        $tr = $("<tr></tr>");
+                                        $td1 = $('<td class="TD_STYLE2">' + list[item].first_kind_name + '</td>');
+                                        $td2 = $('<td class="TD_STYLE2">' + list[item].second_kind_name + '</td>');
+                                        $td3 = $('<td class="TD_STYLE2">' + list[item].third_kind_name + '</td>');
+                                        $td4 = $('<td class="TD_STYLE2">' + list[item].salary_standard_name + '</td>');
+                                        $td5 = $('<td class="TD_STYLE2">' + list[item].human_name + '</td>');
+                                        $td6 = $("<td class='TD_STYLE2'> <a href='/major_change/DDSH/" + list[item].mch_id + "'>审核</a></td>");
+                                        $tr.append($td1, $td2, $td3, $td4, $td5, $td6);
+                                        $("#tb").append($tr);
+                                        $("#page").text(currentPage);
+                                        $("#rows").text(row);
+                                        $("#count").text(2);
+                                        $("#pages").text(pages);
+                                        $("#people").text(row);
+                                    }
+                                }
+                            })
+                        });
+                    });
+                </script>
+</body>
+</html>
+

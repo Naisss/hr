@@ -11,9 +11,9 @@ using System.Linq.Expressions;
 
 namespace BLL
 {
-    public class third_kindBLL:Ithird_kindBLL
-    {
-        Ithird_kindDao<config_file_third_kind> i = iocCreate.third_kindDao();
+    //public class third_kindBLL:Ithird_kindBLL
+    //{
+    //    Ithird_kindDao<config_file_third_kind> i = iocCreate.third_kindDao();
 
         public List<config_file_third_kind> Select() {
             return i.SelectAll();

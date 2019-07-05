@@ -55,18 +55,24 @@
     <Compile Include="DBhelper.cs" />
     <Compile Include="engage_interviewDao.cs" />
     <Compile Include="engage_resumeDao.cs" />
+    <Compile Include="file_third_kindDao.cs" />
     <Compile Include="first_kindDao.cs" />
     <Compile Include="human_fileDao.cs" />
+    <Compile Include="human_fileDao.cs" />
+    <Compile Include="Ifile_third_kindDao.cs" />
     <Compile Include="LoginDao.cs" />
+    <Compile Include="major.cs" />
     <Compile Include="majorDao.cs" />
-    <Compile Include="major_kindDao.cs" />
+    <Compile Include="major_changeDao.cs" />
     <Compile Include="major_releaseDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="public_charDao.cs" />
+    <Compile Include="QuanXianDao.cs" />
     <Compile Include="salary_standardDao.cs" />
     <Compile Include="salary_standard_detailsDao.cs" />
     <Compile Include="second_kindDao.cs" />
     <Compile Include="third_kindDao.cs" />
+    <Compile Include="UsersDao.cs" />
     <Compile Include="usersDao.cs" />
   </ItemGroup>
   <ItemGroup>
