@@ -49,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="engage_interviewBLL.cs" />
+    <Compile Include="engage_resumeBLL.cs" />
+    <Compile Include="human_fileBLL.cs" />
     <Compile Include="LoginBll.cs" />
     <Compile Include="majorBLL.cs" />
     <Compile Include="major_kindBLL.cs" />
@@ -56,8 +59,11 @@
     <Compile Include="first_kindBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="public_charBLL.cs" />
+    <Compile Include="salary_standardBLL.cs" />
+    <Compile Include="salary_standard_detailsBLL.cs" />
     <Compile Include="second_kindBLL.cs" />
     <Compile Include="third_kindBLL.cs" />
+    <Compile Include="usersBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

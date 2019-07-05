@@ -1,0 +1,168 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet"
+          href="../../../css/table.css" type="text/css">
+    <link rel="stylesheet"
+          href="../../../css/cwcalendar.css"
+          type="text/css">
+    <script type="text/javascript"
+            src="../../../javascript/comm/comm.js">
+
+    </script>
+    <script type="text/javascript"
+            src="../../../javascript/comm/list.js">
+
+    </script>
+    <script type="text/javascript"
+            src="../../../javascript/calendar-ch.js">
+
+    </script>
+    <script type="text/javascript"
+            src="../../../javascript/jquery-1.7.2.js">
+
+    </script>
+    <script type="text/javascript"
+            src="../../../javascript/locate.js">
+
+    </script>
+    <script type="text/javascript"
+            src="../../../javascript/select.js">
+
+    </script>
+    <script type="text/javascript">
+		var currentpage = 1;
+		var rows;
+		var page;
+		$(function () {
+		    Fill();
+		    $("#top").click(function () {
+		        if (currentpage > 1) {
+		            currentpage--;
+		        } else {
+		            alert('已经是第一页了');
+		        }
+		        Fill();
+
+		    });
+
+		    $("#buttom").click(function () {
+		        if (currentpage < page) {
+		            currentpage++;
+		        } else {
+		            alert('已经是最后一页了');
+		        }
+		        Fill();
+
+		    });
+		    $("#go").click(function () {
+		        var text = $("#currPage").val();
+		        if (text == "" || text == 0 || isNaN(text)||text>page) {
+
+		            alert('输入的数不能为空、必须大于0、必须是数字和小于总页数');
+		            $("#currPage").val('');
+		        } else {
+		            currentpage = text;
+		            $("#currPage").val('');
+		        }
+		        Fill();
+
+		    });
+
+		})
+		function Fill() {
+
+		    $.get("/Engage_resume/LYGetlist/?currentpage=" + currentpage, function (data) {
+		        // console.log(data);
+		        var dt = data["data"];
+		        rows = data["rows"];
+		         page = data["page"];
+
+		         var tr;
+		         if (dt.length == 0) {
+		             $("#tab1 tr:gt(0)").empty();
+		             tr = $('<tr><td>没有数据哦</td></tr>');
+		             $("#tab1").append(tr);
+		         }else{
+		             $("#tab1 tr:gt(0)").empty();
+
+		        // alert(dt.length);
+		      //   console.log(dt);
+		             for (var i = 0; i < dt.length; i++) {
+		          
+		                 tr = $('<tr><td class="TD_STYLE2">' + dt[i]["human_name"] + '</td><td class="TD_STYLE2">' + dt[i]["human_sex"] + '</td><td class="TD_STYLE2">' + dt[i]["human_age"] + '</td><td class="TD_STYLE2">' + dt[i]["human_major_kind_name"] + '</td><td class="TD_STYLE2">' + dt[i]["human_major_name"] + ' </td><td class="TD_STYLE2">' + dt[i]["human_college"] + ' </td> <td class="TD_STYLE2">' + dt[i]["human_educated_major"] + ' </td> <td class="TD_STYLE2"> <a href="/Engage_resume/Getshenqinluyong/' + dt[i]["res_id"] + '">申请</a></td></tr>');
+
+
+		                 $("#tab1").append(tr);
+		             }
+		         }
+		        $("#butt").html(" &nbsp;&nbsp;总数：" + rows + " 例 &nbsp;&nbsp;&nbsp;当前第" + currentpage + "页 /每页显示 2 条 &nbsp;&nbsp;&nbsp;共 " + page + " 页 &nbsp;&nbsp;&nbsp");
+		        $("#countttt").html(rows);
+		    }, "json");
+		}
+
+    </script>
+</head>
+
+<body>
+    <form action="/HR_Fist/recruit/recruitAction!toRegisterList" name="fm">
+        <input type="hidden" name="utilBean.currPage" id="page" />
+        <table width="100%">
+            <tr>
+                <td>
+                    <font color="black">您正在做的业务是：人力资源--招聘管理--录用管理--录用申请  </font>
+                </td>
+            </tr>
+
+        </table>
+        <table width="100%" border="1" cellpadding=0 cellspacing=1
+               bordercolorlight=#848284 bordercolordark=#eeeeee
+               class="TABLE_STYLE1" id="tab1">
+            <tr class="TR_STYLE1">
+                <td class="TD_STYLE1">
+                    姓名
+                </td>
+                <td class="TD_STYLE1">
+                    性别
+                </td>
+                <td class="TD_STYLE1">
+                    年龄
+                </td>
+                <td class="TD_STYLE1">
+                    职位类别
+                </td>
+                <td class="TD_STYLE1">
+                    职位名称
+                </td>
+                <td class="TD_STYLE1">
+                    毕业院校
+                </td>
+                <td class="TD_STYLE1">
+                    学历专业
+                </td>
+                <td class="TD_STYLE1">
+                    申请
+                </td>
+            </tr>
+
+
+
+
+
+        </table>
+        <p>
+            <span id="butt">  </span>
+            <a id="top">上一页</a> &nbsp;&nbsp;&nbsp;
+            <a id="buttom">下一页</a> &nbsp;&nbsp;&nbsp;跳到第 <input name=page type=text class=input1 id="currPage" size=1> 页&nbsp;&nbsp;<img src="../../../images/go.bmp" id="go" width=18 height=18 border=0>
+</form>
+
+</body>
+</html>
+

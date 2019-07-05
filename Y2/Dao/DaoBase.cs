@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Runtime.Remoting.Messaging;
 using Entity;
+using System.Data.Entity;
 namespace Dao
 {
     public   class DaoBase<T> where T : class
@@ -25,12 +26,12 @@ namespace Dao
         //通用查询全部
         public List<T> SelectAll()
         {
-            return st.Set<T>().Select(e => e).ToList();
+            return st.Set<T>().Select(e => e).AsNoTracking().ToList();
         }
         //通用where条件查询
         public List<T> selectWhere(Expression<Func<T, bool>> where)
         {
-            return st.Set<T>().Where(where).Select(e => e).ToList();
+            return st.Set<T>().Where(where).Select(e => e).AsNoTracking().ToList();
         }
         //通用分页查询
         public List<T> FenYe<K>(Expression<Func<T, K>> order, Expression<Func<T, bool>> where, out int rows, int currentPage, int pageSize)
@@ -44,13 +45,31 @@ namespace Dao
         public int Insert(T t)
         {
             st.Entry<T>(t).State = System.Data.Entity.EntityState.Added;
-            return st.SaveChanges();
+            try
+            {
+                return st.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+           
         }
         //通用修改
         public int Update(T t)
         {
             st.Entry<T>(t).State = System.Data.Entity.EntityState.Modified;
-            return st.SaveChanges();
+            try
+            {
+                return st.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+            
         }
         //通用删除
         public int Del(T t)

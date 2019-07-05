@@ -7,6 +7,8 @@ using IocContianer;
 using IDao;
 using IBLL;
 using Entity;
+using System.Linq.Expressions;
+
 namespace BLL
 {
     public  class majorBLL:ImajorBLL
@@ -15,6 +17,10 @@ namespace BLL
         public List<config_major> Select() {
 
             return idm.SelectAll();
+        }
+
+        public List<config_major> SelectWhere(Expression<Func<config_major, bool>> where) {
+            return idm.selectWhere(where);
         }
     }
 }
