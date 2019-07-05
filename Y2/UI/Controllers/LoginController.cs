@@ -12,6 +12,7 @@ namespace UI.Controllers
     public class LoginController : Controller
     {
         ILoginBll ib = iocCreate.CreateTextBll<ILoginBll>("LoginBll");
+        // GET: Login
         public ActionResult Index()
         {
             return View();
@@ -20,7 +21,9 @@ namespace UI.Controllers
         public ActionResult DL(users u)
         {
             object user = ib.login(u.u_name, u.u_password);
+            object u_roleid = ib.u_roleidSelect(u.u_name,u.u_password);
             Session["user"] = user;
+            Session["u_roleid"] = u_roleid;
             return RedirectToAction("Index", "Home");
         }
 

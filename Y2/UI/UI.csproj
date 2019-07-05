@@ -202,6 +202,7 @@
     <Compile Include="Controllers\Major_releaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="DBhelper.cs" />
     <Compile Include="Filters\CustomerAttribute.cs" />
     <Compile Include="Filters\LoginAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -217,6 +218,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="css\cwcalendar.css" />
+    <Content Include="css\easyui.css" />
+    <Content Include="css\icon.css" />
     <Content Include="css\table.css" />
     <Content Include="DatePicker\calendar.js" />
     <Content Include="DatePicker\config.js" />
@@ -447,6 +450,7 @@
     <Content Include="javascript\comm\list.js" />
     <Content Include="javascript\comm\select.js" />
     <Content Include="javascript\comm\time.js" />
+    <Content Include="javascript\easyui-lang-zh_CN.js" />
     <Content Include="javascript\easyui\jquery.easyui.min.js" />
     <Content Include="javascript\easyui\themes\default\accordion.css" />
     <Content Include="javascript\easyui\themes\default\calendar.css" />
@@ -620,6 +624,7 @@
     <Content Include="javascript\jquery-1.7.2.js" />
     <Content Include="javascript\jquery.easyui.min.js" />
     <Content Include="javascript\jquery.messager.js" />
+    <Content Include="javascript\jquery.min.js" />
     <Content Include="javascript\locate.js" />
     <Content Include="javascript\login.js" />
     <Content Include="javascript\media\about.jpg" />
@@ -672,11 +677,14 @@
     </Content>
     <Content Include="javascript\input_control\validation-config.dtd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\easyui-lang-zh_CN.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.2.js" />
+    <Content Include="Scripts\jquery.easyui.min.js" />
     <Content Include="Scripts\jquery.messager.js" />
+    <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
