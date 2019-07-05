@@ -54,11 +54,13 @@
     <Compile Include="Ifirst_kindBLL.cs" />
     <Compile Include="Ihuman_fileBLL.cs" />
     <Compile Include="ImajorBLL.cs" />
+    <Compile Include="Imajor_changeBll.cs" />
     <Compile Include="Imajor_kindBLL.cs" />
     <Compile Include="Imajor_releaseBLL.cs" />
     <Compile Include="Ipublic_charBLL.cs" />
     <Compile Include="Isalary_standardBLL.cs" />
     <Compile Include="Isalary_standard_detailsBLL.cs" />
+    <Compile Include="IQuanxianBll.cs" />
     <Compile Include="Isecond_kindBLL.cs" />
     <Compile Include="Ithird_kindBLL.cs" />
     <Compile Include="ILoginBll.cs" />
@@ -67,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\IBLL.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

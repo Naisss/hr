@@ -1,0 +1,74 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="~/css/table.css" rel="stylesheet" />
+</head>
+<body>
+    @{DataTable dt = ViewBag.list;}
+        <font color="black"> 您在做的业务是-人力资源-调动管理-调动查询列表 </font>  <br /><br /><br />
+        <table width="100%" border="1" cellpadding=0 cellspacing=1 bordercolorlight=#848284 bordercolordark=#eeeeee class="TABLE_STYLE1 " id="tb">
+            <tr height="21">
+                <td width="19%" class="TD_STYLE1">
+                    I级机构
+                </td>
+                <td width="19%" class="TD_STYLE1">
+                    II级机构
+                </td>
+                <td width="19%" class="TD_STYLE1">
+                    Ⅲ级机构
+                </td>
+                <td width="19%" class="TD_STYLE1">
+                    薪酬标准
+                </td>
+                <td width="19%" class="TD_STYLE1">
+                    名字
+                </td>
+                <td width="5%" class="TD_STYLE1">
+                    查看
+                </td>
+            </tr>
+            @for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                <tr height="21" id="one">
+                    <td class="TD_STYLE2">
+                        @dt.Rows[i]["first_kind_name"]
+                    </td>
+                    <td class="TD_STYLE2">
+                        @dt.Rows[i]["second_kind_name"]
+                    </td>
+                    <td class="TD_STYLE2">
+                        @dt.Rows[i]["third_kind_name"]
+                    </td>
+                    <td class="TD_STYLE2">
+                        @dt.Rows[i]["salary_standard_name"]
+                    </td>
+                    <td class="TD_STYLE2">
+                        @dt.Rows[i]["human_name"]
+                    </td>
+                    <td class="TD_STYLE2">
+                        <a href='/major_change/CK/@dt.Rows[i]["mch_id"]'>查看</a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+
+
+
+
+
+
+
+
+
+        <br>
+        <br>
+</body>
+</html>

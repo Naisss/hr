@@ -111,6 +111,7 @@
     <Compile Include="human_file_dig.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="JueSe.cs" />
     <Compile Include="major_change.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

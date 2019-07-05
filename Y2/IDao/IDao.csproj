@@ -51,14 +51,17 @@
   <ItemGroup>
     <Compile Include="Iengage_interviewDao.cs" />
     <Compile Include="Iengage_resumeDao.cs" />
+    <Compile Include="Ifile_third_kindDao.cs" />
     <Compile Include="Ihuman_fileDao.cs" />
     <Compile Include="ILoginDao.cs" />
     <Compile Include="ImajorDao.cs" />
+    <Compile Include="Imajor_changeDao.cs" />
     <Compile Include="Imajor_kindDao.cs" />
     <Compile Include="Imajor_releaseDao.cs" />
     <Compile Include="Ipublic_charDao.cs" />
     <Compile Include="Isalary_standardDao.cs" />
     <Compile Include="Isalary_standard_detailsDao.cs" />
+    <Compile Include="IQuanxianDao.cs" />
     <Compile Include="Isecond_kindDao.cs" />
     <Compile Include="Ithird_kindDao.cs" />
     <Compile Include="Ifirst_kindDao.cs" />
@@ -68,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\IDao.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +79,21 @@
       <Project>{a74fc79a-b2c3-4ab6-b5da-ede4b2ce97d7}</Project>
       <Name>Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Entity.dll" />
+    <Content Include="bin\Debug\Entity.pdb" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="bin\Debug\IDao.dll" />
+    <Content Include="bin\Debug\IDao.pdb" />
+    <Content Include="bin\Debug\zh-Hans\EntityFramework.resources.dll" />
+    <Content Include="bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

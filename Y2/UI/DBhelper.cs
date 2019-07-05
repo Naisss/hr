@@ -34,7 +34,7 @@ namespace UI
 
         private static SqlConnection GetConnection()
         {
-            SqlConnection cn = new SqlConnection("server =.;database =HR;uid = sa;pwd = 123");
+            SqlConnection cn = new SqlConnection("server =.;database =HR;uid = sa;pwd = root");
             return cn;
         }
 
