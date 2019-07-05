@@ -49,18 +49,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ifile_third_Bll.cs" />
+    <Compile Include="Ihuman_fileBll.cs" />
     <Compile Include="ImajorBLL.cs" />
+    <Compile Include="Imajor_changeBll.cs" />
     <Compile Include="Imajor_kindBLL.cs" />
     <Compile Include="Imajor_releaseBLL.cs" />
     <Compile Include="Ipublic_charBLL.cs" />
+    <Compile Include="IQuanxianBll.cs" />
     <Compile Include="Isecond_kindBLL.cs" />
     <Compile Include="Ithird_kindBLL.cs" />
     <Compile Include="ILoginBll.cs" />
     <Compile Include="IUsersBll.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\IBLL.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +76,22 @@
       <Project>{a74fc79a-b2c3-4ab6-b5da-ede4b2ce97d7}</Project>
       <Name>Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Entity.dll" />
+    <Content Include="bin\Debug\Entity.pdb" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="bin\Debug\IBLL.dll" />
+    <Content Include="bin\Debug\IBLL.pdb" />
+    <Content Include="bin\Debug\zh-Hans\EntityFramework.resources.dll" />
+    <Content Include="bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
