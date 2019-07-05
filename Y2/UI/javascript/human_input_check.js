@@ -4,7 +4,7 @@ $(function() {
 		var humanIdCard = $("#humanIdCard");
 		var humanAge = $("#humanAge");
 		var humanEmail = $("#humanEmail");
-		var humanTelephone = $("#humanTelephone");
+		//var humanTelephone = $("#humanTelephone");
 		var humanQq = $("#humanQq");
 		var humanMobilephone = $("#humanMobilephone");
 		var reg1 = /^\s+/;
@@ -12,7 +12,7 @@ $(function() {
 		var reg3 = /^\d{17}[0-9X]$/;
 		var reg4 = /^\d{1,2}$/;
 		var reg5 = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-		var reg6 = /^\d{3}-\d{8}|\d{4}-\d{7}$/;
+		
 		var reg7 = /^[1-9][0-9]{4,}$/;
 		var reg8 = /^[1-9]{2}\d{9}$/;
 		if ($("#firstKind").val() == "0") {
@@ -44,11 +44,7 @@ $(function() {
 			humanEmail[0].select();
 			return false;
 		}
-		if (!reg6.test(humanTelephone.val()) && humanTelephone.val() != "") {
-			$.messager.show("消息提示", "电话格式不正确！", 2000);
-			humanTelephone[0].select();
-			return false;
-		}
+		
 		if (!reg7.test(humanQq.val()) && humanQq.val() != "") {
 			$.messager.show("消息提示", "QQ格式不正确！", 2000);
 			humanQq[0].select();

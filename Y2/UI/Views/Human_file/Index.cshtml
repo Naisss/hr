@@ -1,0 +1,647 @@
+﻿@model Entity.human_file
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet"
+          href="../../css/table.css" type="text/css">
+    <link rel="stylesheet"
+          href="../../css/cwcalendar.css" type="text/css">
+    <script type="text/javascript"
+            src="../../javascript/jquery-1.7.2.js">
+    </script>
+    <script type="text/javascript"
+            src="../../javascript/jquery.messager.js">
+    </script>
+    <script type="text/javascript"
+            src="../../javascript/comm/comm.js">
+    </script>
+    <script type="text/javascript"
+            src="../../javascript/comm/select.js">
+    </script>
+    <script type="text/javascript"
+            src="../../javascript/calendar-ch.js">
+    </script>
+    <script type="text/javascript"
+            src="../../javascript/time.js">
+    </script>
+    <script type="text/javascript"
+            src="../../javascript/human_register.js">
+    </script>
+    <script src="~/DatePicker/WdatePicker.js"></script>
+    @*<script type="text/javascript"
+            src="../../javascript/human_input_check.js">
+    </script>*@
+    <script>
+        window.onload = check;
+        function tick() {
+            var now = new Date();
+            var hours, minutes, seconds, noon;
+            var intHours, intMinutes, intSeconds;
+            intHours = now.getHours();
+            intMinutes = now.getMinutes();
+            intSeconds = now.getSeconds();
+            if (intHours < 24) {
+                hours = intHours + ":";
+                noon = "A.M.";
+            } else {
+                intHours = intHours - 24;
+                hours = intHours + ":";
+                noon = "P.M.";
+            }
+            if (intMinutes < 10) {
+                minutes = "0" + intMinutes + ":";
+            } else {
+                minutes = intMinutes + ":";
+            }
+            if (intSeconds < 10) {
+                seconds = "0" + intSeconds + " ";
+            } else {
+                seconds = intSeconds + " ";
+            }
+            timeString = hours + minutes + seconds;
+            var now = new Date();
+            document.getElementById("create_time").value = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + timeString;
+            window.setTimeout("tick();", 1000);
+        }
+
+        //load事件
+        function check() {
+            //获得系统当前时间的方法
+            tick();
+        }
+        function aaa() {
+            var h = $("#birthday").val();
+            var s = h.substring("-", 4);
+            //alert(s);
+            var yaer = new Date();
+            var nian = yaer.getFullYear();
+            var age = parseInt(nian) - parseInt(s);
+            $("#humanAge").val(age);
+        }
+
+        function SelectEid() {
+
+            var yid = $("#firstKind").val();
+         //   alert(yid);
+            $.get("/Human_file/GetbyYid/" + yid, function (da) {
+                // console.log(data);
+                $("#secondKind option:gt(0)").remove();
+                var data = eval(da);
+
+                for (var i = 0; i < data.length; i++) {
+
+                    var $option = $('<option value="' + data[i]["second_kind_id"] + '" sid="' + data[i]["first_kind_id"] + '">' + data[i]["second_kind_name"] + '</option>');
+
+                    $("#secondKind").append($option);
+                }
+            }, "json");
+        }
+        function SelectSid() {
+
+            var eid = $("#secondKind").val();
+
+            var yid = $("#firstKind").val();
+            // alert(yid);
+            $.get("/Human_file/GetbyEid/" + eid + "?yid=" + yid, function (data) {
+
+                $("#thirdKind option:gt(0)").remove();
+
+                for (var i = 0; i < data.length; i++) {
+                    var $option = $('<option value="' + data[i]["third_kind_id"] + '">' + data[i]["third_kind_name"] + '</option>');
+                    $("#thirdKind").append($option);
+                }
+            }, "json");
+        }
+
+
+
+        function SelectMid() {
+
+            var kid = $("#majorKind").val();
+
+
+            $.get("/Human_file/GetbyKid/" + kid, function (data) {
+                $("#majorName option:gt(0)").remove();
+
+                for (var i = 0; i < data.length; i++) {
+                    var $option = $(' <option value="' + data[i]["major_id"] + '">' + data[i]["major_name"] + '</option>');
+                    $("#majorName").append($option);
+                }
+            }, "json");
+        }
+
+    </script>
+</head>
+
+<body>
+    <form method="post" action="/Human_file/index">
+        <table width="100%">
+            <tr>
+                <td>
+                    <font color="black">您正在做的业务是：人力资源--人力资源档案管理--人力资源档案登记 </font>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <input type="submit" value="提交" class="BUTTON_STYLE1" />
+                    <input type="reset" value="清除" class="BUTTON_STYLE1" />
+                </td>
+            </tr>
+        </table>
+        <table width="100%" border="1" cellpadding=3 cellspacing=1
+               bordercolorlight=#848284 bordercolordark=#eeeeee
+               class="TABLE_STYLE1">
+            <tr>
+                   <td class="TD_STYLE1" width="11%">
+                    I级机构
+                </td>
+                <td width="14%" class="TD_STYLE2">
+                    <input type="hidden" value="@Model.huf_id" name="huf_id" class="INPUT_STYLE2" />
+                    <input type="hidden" value="@Model.human_id" name="human_id" class="INPUT_STYLE2" />
+
+                    <select name="first_kind_id" class="SELECT_STYLE1" id="firstKind" onchange="SelectEid();">
+                        <option value="">请选择</option>
+                        @{List<config_file_first_kind> ff = ViewBag.yiji;}
+                        @foreach (var item in ff)
+                        {
+                            <option value="@item.first_kind_id">@item.first_kind_name</option>
+                        }
+
+
+                    </select>
+                    <input type="hidden" name="humanFile.firstKindName" />
+                </td>
+                <td width="11%" class="TD_STYLE1">
+                    II级机构
+                </td>
+                <td width="14%" class="TD_STYLE2">
+                    <select name="second_kind_id" class="SELECT_STYLE1" id="secondKind" onchange="SelectSid();">
+                        <option value="">请选择</option>
+
+                    </select>
+
+                </td>
+                <td width="11%" class="TD_STYLE1">
+                    III级机构
+                </td>
+                <td class="TD_STYLE2" colspan="2">
+                    <select name="third_kind_id" class="SELECT_STYLE1" id="thirdKind">
+                        <option value="">请选择</option>
+
+                    </select>
+
+                </td>
+                <td rowspan="5" style="text-align: center;"></td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    职位分类
+                </td>
+                <td class="TD_STYLE2">
+                    <select name="human_major_kind_id" class="SELECT_STYLE1" id="majorKind" onchange="SelectMid();">
+                        <option value="">请选择</option>
+                        @{List<config_major_kind> mk = ViewBag.fl;}
+                        @foreach (var item in mk)
+                        {
+                            <option value="@item.major_kind_id">@item.major_kind_name</option>
+                        }
+                    </select>
+
+                </td>
+                <td class="TD_STYLE1">
+                    职位名称
+                </td>
+                <td class="TD_STYLE2">
+                    <select name="human_major_id" class="SELECT_STYLE1" id="majorName">
+                        <option value="">请选择</option>
+                    </select>
+                    <input type="hidden" name="humanFile.hunmaMajorName" />
+                </td>
+                <td class="TD_STYLE1">
+                    职称
+                </td>
+                <td colspan="2" class="TD_STYLE2">
+                    <select name="human_pro_designation" class="SELECT_STYLE1">
+                        <option value="">请选择</option>
+                        @{ List<config_public_char> p = ViewBag.chenzhi;}
+                        @foreach (var item in p)
+                        {
+                            <option value="@item.attribute_name">@item.attribute_name</option>
+
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    姓名
+                </td>
+                <td class="TD_STYLE2">
+                    <input type="text" id="human_name" name="human_name"
+                           class="INPUT_STYLE2" value="@Model.human_name"  />
+                </td>
+                <td class="TD_STYLE1">
+                    性别
+                </td>
+                <td class="TD_STYLE2">
+                    <select name="human_sex" class="SELECT_STYLE1">
+                        @if (Model.human_sex == "男")
+                        {
+                        <option value="男" selected="selected">
+                            男
+                        </option>
+                        <option value="女">
+                            女
+                        </option>
+                        }
+                        else
+                        {
+                            <option value="男">
+                                男
+                            </option>
+                            <option value="女" selected="selected">
+                                女
+                            </option>
+                        }
+                    </select>
+                </td>
+                <td class="TD_STYLE1">
+                    EMAIL
+                </td>
+                <td colspan="2" class="TD_STYLE2">
+                    <input type="text" name="human_email" id="humanEmail"
+                           class="INPUT_STYLE2" readonly value="@Model.human_email">
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    电话
+                </td>
+                <td class="TD_STYLE2">
+                    <input type="text" name="human_telephone" id="humanTelephone"
+                           class="INPUT_STYLE2"  value="@Model.human_telephone">
+                </td>
+                <td class="TD_STYLE1">
+                    QQ
+                </td>
+                <td class="TD_STYLE2">
+                    <input type="text" name="human_qq" id="humanQq"
+                           class="INPUT_STYLE2" >
+                </td>
+                <td class="TD_STYLE1">
+                    手机
+                </td>
+                <td colspan="2" class="TD_STYLE2">
+                    <input type="text" name="human_mobilephone" id="humanMobilephone"
+                           class="INPUT_STYLE2"   value="@Model.human_mobilephone">
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    住址
+                </td>
+                <td colspan="3" class="TD_STYLE2">
+                    <input type="text" name="human_address"
+                           class="INPUT_STYLE2" value="@Model.human_address">
+                </td>
+                <td class="TD_STYLE1">
+                    邮编
+                </td>
+                <td colspan="2" class="TD_STYLE2">
+                    <input type="text" name="human_postcode"
+                           class="INPUT_STYLE2" value="@Model.human_postcode">
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    国籍
+                </td>
+                <td class="TD_STYLE2">
+                    <select name="human_nationality" class="SELECT_STYLE1">
+                        @{ List<config_public_char> guoji = ViewBag.guoji;}
+
+                        @foreach (config_public_char item in guoji)
+                        {
+                            if (item.attribute_name == Model.human_nationality)
+                            {
+                                <option selected value="@item.attribute_name">@item.attribute_name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.attribute_name">@item.attribute_name</option>
+
+                            }
+                        }
+                    </select>
+                </td>
+                <td class="TD_STYLE1">
+                    出生地
+                </td>
+                <td class="TD_STYLE2">
+                    <input type="text" name="human_birthplace"
+                           class="INPUT_STYLE2" value="@Model.human_birthplace">
+                </td>
+                <td class="TD_STYLE1">
+                    生日
+                </td>
+                <td width="13%" class="TD_STYLE2">
+                    <input type="text" name="human_birthday" readonly="readonly"
+                           class="INPUT_STYLE2" id="birthday" onchange="aaa();"  onFocus="WdatePicker({lang:'zh-cn'})" value="@Model.human_birthday" >
+                </td>
+                <td width="11%" class="TD_STYLE1">
+                    民族
+                </td>
+                <td class="TD_STYLE2" width="14%">
+                    <select name="human_race" class="SELECT_STYLE1">
+                       
+                        @{ List<config_public_char> minzu = ViewBag.minzu;}
+
+                        @foreach (config_public_char item in minzu)
+                        {
+                            if (item.attribute_name == Model.human_race)
+                            {
+                                <option selected value="@item.attribute_name">@item.attribute_name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.attribute_name">@item.attribute_name</option>
+
+                            }
+                        }
+                        
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    宗教信仰
+                </td>
+                <td class="TD_STYLE2">
+                    <select name="human_religion" class="SELECT_STYLE1">
+                      
+                        @{ List<config_public_char> xinyan = ViewBag.xinyan;}
+
+                        @foreach (config_public_char item in xinyan)
+                        {
+                            if (item.attribute_name == Model.human_religion)
+                            {
+                                <option selected value="@item.attribute_name">@item.attribute_name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.attribute_name">@item.attribute_name</option>
+
+                            }
+                        }
+                        
+                    </select>
+                </td>
+                <td class="TD_STYLE1">
+                    政治面貌
+                </td>
+                <td class="TD_STYLE2">
+                    <select name="human_party" class="SELECT_STYLE1">
+                       
+                        @{ List<config_public_char> mianmao = ViewBag.mianmao;}
+
+                        @foreach (config_public_char item in mianmao)
+                        {
+                            if (item.attribute_name == Model.human_party)
+                            {
+                                <option selected value="@item.attribute_name">@item.attribute_name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.attribute_name">@item.attribute_name</option>
+
+                            }
+                        }
+                    </select>
+                </td>
+                <td class="TD_STYLE1">
+                    身份证号码
+                </td>
+                <td class="TD_STYLE2">
+                    <input type="text" name="human_id_card" id="humanIdCard"
+                           class="INPUT_STYLE2" readonly="readonly" value="@Model.human_id_card">
+                </td>
+                <td class="TD_STYLE1">
+                    社会保障号码
+                </td>
+                <td class="TD_STYLE2">
+                    <input type="text" name="human_society_security_id"
+                           class="INPUT_STYLE2">
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    年龄
+                </td>
+                <td class="TD_STYLE2">
+                    <input type="text" name="human_age" id="humanAge"
+                           class="INPUT_STYLE2" readonly="readonly" value="@Model.human_age">
+                </td>
+                <td class="TD_STYLE1">
+                    学历
+                </td>
+                <td class="TD_STYLE2">
+                    <select name="human_educated_degree" class="SELECT_STYLE1">
+                        @{ List<config_public_char> xueli = ViewBag.xueli;}
+
+                        @foreach (config_public_char item in xueli)
+                        {
+                            if (item.attribute_name == Model.human_educated_degree)
+                            {
+                                <option selected value="@item.attribute_name">@item.attribute_name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.attribute_name">@item.attribute_name</option>
+
+                            }
+                        }
+                        
+                    </select>
+                </td>
+                <td class="TD_STYLE1">
+                    教育年限
+                </td>
+                <td class="TD_STYLE2">
+                    <select name="human_educated_years" class="SELECT_STYLE1">
+                     
+                        @{ List<config_public_char> nianxian = ViewBag.nianxian;}
+
+                        @foreach (config_public_char item in nianxian)
+                        {
+                            if (item.attribute_name == Model.human_educated_years.ToString())
+                            {
+                                <option selected value="@item.attribute_name">@item.attribute_name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.attribute_name">@item.attribute_name</option>
+
+                            }
+                        }
+                        
+                    </select>
+                </td>
+                <td class="TD_STYLE1">
+                    学历专业
+                </td>
+                <td class="TD_STYLE2">
+                    <select name="human_educated_major" class="SELECT_STYLE1">
+                      
+                        @{ List<config_public_char> zhuanye = ViewBag.zhuanye;}
+
+                        @foreach (config_public_char item in zhuanye)
+                        {
+                            if (item.attribute_name == Model.human_educated_major)
+                            {
+                                <option selected value="@item.attribute_name">@item.attribute_name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.attribute_name">@item.attribute_name</option>
+
+                            }
+                        }
+                        
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    薪酬标准
+                </td>
+                <td class="TD_STYLE2">
+                    <select name="salary_standard_id" class="SELECT_STYLE1">
+                        <option value="">请选择</option>
+                        @{ List<salary_standard> xinchou = ViewBag.xinchou;}
+                        @foreach (var item in xinchou)
+                        {
+                            <option value="@item.standard_id">@item.standard_name</option>
+
+                        }
+                    </select>
+                </td>
+                <td class="TD_STYLE1">
+                    开户银行
+                </td>
+                <td class="TD_STYLE2">
+                    <input type="text" name="human_bank"
+                           class="INPUT_STYLE2">
+                </td>
+                <td class="TD_STYLE1">
+                    帐号
+                </td>
+                <td class="TD_STYLE2">
+                    <input type="text" name="human_account"
+                           class="INPUT_STYLE2">
+                </td>
+                <td class="TD_STYLE1">
+                    登记人
+                </td>
+                <td class="TD_STYLE2">
+                    @{ var use = ViewBag.user;}
+                    <input type="text" name="register" value="@use"
+                           readonly="readonly" class="INPUT_STYLE2">
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    建档时间
+                </td>
+                <td class="TD_STYLE2">
+                    <input type="text" name="regist_time" id="create_time" readonly="readonly"
+                           class="INPUT_STYLE2">
+                </td>
+                <td class="TD_STYLE1">
+                    特长
+                </td>
+                <td class="TD_STYLE2">
+                    <select name="human_speciality" class="SELECT_STYLE1">
+                       
+                        @{ List<config_public_char> techang = ViewBag.techang;}
+
+                        @foreach (config_public_char item in techang)
+                        {
+                            if (item.attribute_name == Model.human_speciality)
+                            {
+                                <option selected value="@item.attribute_name">@item.attribute_name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.attribute_name">@item.attribute_name</option>
+
+                            }
+                        }
+                        
+                    </select>
+                </td>
+                <td class="TD_STYLE1">
+                    爱好
+                </td>
+                <td class="TD_STYLE2">
+                    <select name="human_hobby" class="SELECT_STYLE1">
+                        
+                        @{ List<config_public_char> aihao = ViewBag.aihao;}
+
+                        @foreach (config_public_char item in aihao)
+                        {
+                            if (item.attribute_name == Model.human_hobby)
+                            {
+                                <option selected value="@item.attribute_name">@item.attribute_name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.attribute_name">@item.attribute_name</option>
+
+                            }
+                        }
+                        
+                    </select>
+                </td>
+                <td class="TD_STYLE1">
+                    &nbsp;
+                </td>
+                <td class="TD_STYLE2">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    个人履历
+                </td>
+                <td colspan="7" class="TD_STYLE2">
+                    <textarea name="human_histroy_records" rows="4"
+                              class="TEXTAREA_STYLE1">@Model.human_histroy_records</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    家庭关系信息
+                </td>
+                <td colspan="7" class="TD_STYLE2">
+                    <textarea name="human_family_membership" rows="4"
+                              class="TEXTAREA_STYLE1"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    备注
+                </td>
+                <td colspan="7" class="TD_STYLE2">
+                    <textarea name="remark" rows="4" class="TEXTAREA_STYLE1">@Model.remark</textarea>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

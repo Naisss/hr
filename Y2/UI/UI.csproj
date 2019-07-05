@@ -195,6 +195,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\Engage_interviewController.cs" />
+    <Compile Include="Controllers\Engage_resumeController.cs" />
+    <Compile Include="Controllers\first_kindController.cs" />
+    <Compile Include="Controllers\Human_fileController.cs" />
     <Compile Include="Controllers\Major_releaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -214,6 +218,19 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="css\cwcalendar.css" />
     <Content Include="css\table.css" />
+    <Content Include="DatePicker\calendar.js" />
+    <Content Include="DatePicker\config.js" />
+    <Content Include="DatePicker\lang\en.js" />
+    <Content Include="DatePicker\lang\zh-cn.js" />
+    <Content Include="DatePicker\lang\zh-tw.js" />
+    <Content Include="DatePicker\skin\datePicker.gif" />
+    <Content Include="DatePicker\skin\default\datepicker.css" />
+    <Content Include="DatePicker\skin\default\img.gif" />
+    <Content Include="DatePicker\skin\WdatePicker.css" />
+    <Content Include="DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="DatePicker\WdatePicker.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -339,6 +356,7 @@
     <Content Include="images\images\salary_standard1.gif" />
     <Content Include="images\images\training.gif" />
     <Content Include="images\images\training1.gif" />
+    <Content Include="images\img\b7be29c9d115d064a3ac17a371fe9116.jpg" />
     <Content Include="images\jt0.gif" />
     <Content Include="images\loading.gif" />
     <Content Include="images\login_1.gif" />
@@ -643,6 +661,8 @@
     <Content Include="javascript\winopen\winopenm.js" />
     <Content Include="javascript\winopen\winopenn.js" />
     <Content Include="javascript\winopen\winopens.js" />
+    <Content Include="left.html" />
+    <Content Include="main.html" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -666,6 +686,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="top.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -687,9 +708,52 @@
     <Content Include="Views\first_kind\Index.cshtml" />
     <Content Include="Views\first_kind\Create.cshtml" />
     <Content Include="Views\first_kind\Edit.cshtml" />
+    <Content Include="Views\Major_release\Index.cshtml" />
+    <Content Include="Views\Major_release\Index2.cshtml" />
+    <Content Include="Views\Major_release\Edit.cshtml" />
+    <Content Include="Views\Major_release\index3.cshtml" />
+    <Content Include="Views\Engage_resume\Index.cshtml" />
+    <Content Include="Views\Major_release\shengqin.cshtml" />
+    <Content Include="Views\Engage_resume\index2.cshtml" />
+    <Content Include="Views\Engage_resume\WhereList.cshtml" />
+    <Content Include="Views\Engage_resume\GetFH.cshtml" />
+    <Content Include="Views\Engage_resume\SelectDic.cshtml" />
+    <Content Include="Views\Engage_resume\Selediccc.cshtml" />
+    <Content Include="Views\Engage_resume\WhereList2.cshtml" />
+    <Content Include="Views\Engage_interview\Index.cshtml" />
+    <Content Include="Views\Engage_interview\CreateDJ.cshtml" />
+    <Content Include="Views\Engage_interview\SelectInterview.cshtml" />
+    <Content Include="Views\Engage_interview\index2.cshtml" />
+    <Content Include="Views\Engage_interview\saixuaninter.cshtml" />
+    <Content Include="Views\Engage_resume\index3.cshtml" />
+    <Content Include="Views\Engage_resume\Getshenqinluyong.cshtml" />
+    <Content Include="Views\Engage_resume\index4.cshtml" />
+    <Content Include="Views\Engage_resume\GetShenhe.cshtml" />
+    <Content Include="Views\Engage_resume\index5.cshtml" />
+    <Content Include="Views\Engage_resume\GetSelctly.cshtml" />
+    <Content Include="Views\Human_file\Index.cshtml" />
+    <Content Include="Views\Human_file\Selectdengji.cshtml" />
+    <Content Include="Views\Human_file\Top_file.cshtml" />
+    <Content Include="Views\Human_file\Top_file_file.cshtml" />
+    <Content Include="Views\Human_file\index2.cshtml" />
+    <Content Include="Views\Human_file\FuHe.cshtml" />
+    <Content Include="Views\Human_file\index3.cshtml" />
+    <Content Include="Views\Human_file\Selectwhere_liebiao.cshtml" />
+    <Content Include="Views\Human_file\Select_human_xijie.cshtml" />
+    <Content Include="Views\Human_file\index4.cshtml" />
+    <Content Include="Views\Human_file\BiangenSelect_liebiao.cshtml" />
+    <Content Include="Views\Human_file\Baingeng_human_xijie.cshtml" />
+    <Content Include="Views\Human_file\index5.cshtml" />
+    <Content Include="Views\Human_file\DelSelect_liebiao.cshtml" />
+    <Content Include="Views\Human_file\Del_human_xijie.cshtml" />
+    <Content Include="Views\Human_file\HuiFuSelect_liebiao.cshtml" />
+    <Content Include="Views\Human_file\index6.cshtml" />
+    <Content Include="Views\Human_file\HuiFu_human_xijie.cshtml" />
+    <Content Include="Views\Human_file\index7.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="file_file\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

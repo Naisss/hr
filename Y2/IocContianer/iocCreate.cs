@@ -68,7 +68,90 @@ namespace IocContianer
             ioc.RegisterType<ILoginDao, LoginDao>();
             return ioc.Resolve<ILoginDao>();
         }
+       
+        //第一阶段
+        public static Ifirst_kindDao text01Dao1()
+        {
 
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Ifirst_kindDao, first_kindDao>();
+            return ioc.Resolve<Ifirst_kindDao>();
+
+        }
+
+        //公共属性
+        public static Ipublic_charDao<config_public_char> public_charDao() {
+
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Ipublic_charDao<config_public_char>, public_charDao>();
+            return ioc.Resolve<Ipublic_charDao<config_public_char>>();
+
+        }
+
+
+        //简历登记
+        public static Iengage_resumeDao<engage_resume> engage_resumeDao()
+        {
+
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Iengage_resumeDao<engage_resume>, engage_resumeDao>();
+            return ioc.Resolve<Iengage_resumeDao<engage_resume>>();
+
+        }
+
+
+        //面试登记
+        public static Iengage_interviewDao engage_interviewDao()
+        {
+
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Iengage_interviewDao, engage_interviewDao>();
+            return ioc.Resolve<Iengage_interviewDao>();
+
+        }
+
+        //人力资源档案
+        public static Ihuman_fileDao human_fileDao()
+        {
+
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Ihuman_fileDao, human_fileDao>();
+            return ioc.Resolve<Ihuman_fileDao>();
+
+        }
+
+
+
+        //薪酬标准详细
+        public static Isalary_standard_detailsDao salary_standard_detailsDao()
+        {
+
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Isalary_standard_detailsDao, salary_standard_detailsDao>();
+            return ioc.Resolve<Isalary_standard_detailsDao>();
+
+        }
+
+        //用户标椎
+        public static IusersDao usersDao()
+        {
+
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<IusersDao, usersDao>();
+            return ioc.Resolve<IusersDao>();
+
+        }
+        //薪酬标准基本
+        public static Isalary_standardDao salary_standardDao()
+        {
+
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Isalary_standardDao, salary_standardDao>();
+            return ioc.Resolve<Isalary_standardDao>();
+
+        }
+
+        //bll通用
         public static T CreateTextBll<T>(string bl)
         {
             UnityContainer ioc = new UnityContainer();
@@ -85,14 +168,7 @@ namespace IocContianer
             return ioc.Resolve<T>(bl);
         }
 
-        public static Ifirst_kindDao text01Dao1()
-        {
-
-            UnityContainer ioc = new UnityContainer();
-            ioc.RegisterType<Ifirst_kindDao, first_kindDao>();
-            return ioc.Resolve<Ifirst_kindDao>();
-
-        }
+       
 
 
 

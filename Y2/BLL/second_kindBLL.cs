@@ -7,6 +7,8 @@ using IDao;
 using IocContianer;
 using IBLL;
 using Entity;
+using System.Linq.Expressions;
+
 namespace BLL
 {
     public class second_kindBLL:Isecond_kindBLL
@@ -16,6 +18,10 @@ namespace BLL
         //二级阶段
         public List<config_file_second_kind> Select() {
             return s.SelectAll();
+        }
+
+        public List<config_file_second_kind> SelectWhere(Expression<Func<config_file_second_kind, bool>> where) {
+            return s.selectWhere(where);
         }
     }
 }

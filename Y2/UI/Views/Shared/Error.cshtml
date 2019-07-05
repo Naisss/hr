@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Error";
 }
-
-<h1 class="text-danger">错误了</h1>
+@{ var s=ViewData["s"];}
+<h1 class="text-danger">错误+@s+了</h1>
 <h2 class="text-danger">快去找</h2>
 
