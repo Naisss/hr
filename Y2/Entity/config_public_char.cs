@@ -11,7 +11,8 @@ namespace Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    [MetadataType(typeof(public_charValidate))]
     public partial class config_public_char
     {
         public short pbc_id { get; set; }

@@ -1,0 +1,44 @@
+﻿@using Entity;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/cwcalendar.css" rel="stylesheet" />
+    <link href="~/css/table.css" rel="stylesheet" />
+    <script src="~/javascript/jquery-1.7.2.js"></script>
+    <title>xcxq</title>
+</head>
+<body>
+    @{ List<salary_standard_details> list2 = ViewBag.jj;}
+    您正在做的业务是：人力资源--薪酬详情查看
+    <input type="button" value="返回" onclick="history.back();" class="BUTTON_STYLE1">
+
+    <table bordercolorlight="#848284" bordercolordark="#eeeeee" class="TABLE_STYLE1" width="100%" cellspacing="1" cellpadding="0" border="1">
+        <tr>
+            @for (int i = 0; i < list2.Count; i++)
+            {
+
+                <td class="TD_STYLE1">
+                    @list2[i].item_name
+                </td>
+
+
+            }
+        </tr>
+        <tr>
+            @for (int i = 0; i < list2.Count; i++)
+            {
+                <td>
+                    @list2[i].salary
+
+                </td>
+            }
+        </tr>
+    </table>
+</body>
+</html>

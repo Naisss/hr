@@ -1,0 +1,333 @@
+﻿@model Entity.salary_standard
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="~/javascript/jquery-1.12.4.js"></script>
+    <script src="~/javascript/vue.js"></script>
+
+    <link rel="stylesheet" href="../../css/table.css" type="text/css" />
+    <script type="text/javascript" src="../../javascript/comm/comm.js"></script>
+    <script type="text/javascript" src="../../javascript/jquery-1.7.2.js"></script>
+    <title>无标题文档</title>
+    <script type="text/javascript">
+        $(function () {
+
+        //    $.ajax({
+
+        //        url: "/standard/Index",
+        //        type: "get",
+        //        success: function (msg) {
+        //            console.info(msg);
+        //        }
+
+            //    })
+       
+
+        var vm = new Vue({
+            el: "#stable",
+            data: {
+                nums: null,
+            },
+            methods: {
+                load: function () {
+                    var t = this;
+                    $.ajax({
+                        url: "/standard/Index2",
+                        type: "get",
+                        success: function (msg) {
+                            var data = eval("(" + msg + ")");
+                            t.nums = data;
+
+                        }
+                    });
+                },
+                countMoney: function (obj, o) {
+                    //alert(o);
+                    var arr = new Array();
+                    var items = document.getElementsByName("category");
+                   
+                    var dd = 0;
+                    var le = 0;
+                    for (i = 0; i < items.length; i++) {
+                        if (items[i].checked) {
+                            dd = i;
+                            arr[le] = items[i].value;
+                            le++;
+
+                        }
+                    }
+                 
+                    if (isNaN(document.getElementById(o).value) || document.getElementById(o).value < 0) {
+                        alert("金额填写错误!");
+                        document.getElementById(o).value = "0.00";
+                        return;
+                    }
+                    //var sum = 0;
+                    //for (var i = 0; i <= obj; i++) {
+                    //    var salary = document.getElementById("salary" + i).value;
+                    //    if (salary == "") {
+                    //        salary = "0.00";
+                    //    }
+                    //    sum = Number(sum) + Number(salary);
+
+                    //}
+                    //document.getElementById("sumSalary").value = sum;
+                    var sum = 0;
+                    console.info(arr);
+                    for (var i = 0; i <= arr.length - 1; i++) {
+                        var salary = document.getElementById("salary" + arr[i]).value;
+
+                        if (salary == "") {
+                            salary = "0.00";
+                        }
+                        sum = Number(sum) + Number(salary);
+
+                    }
+                    document.getElementById("sumSalary").value = sum;
+                }
+
+            }
+        });
+        vm.load();
+
+     
+        })
+    </script>
+</head>
+<body>
+
+    <form method="post" action="/standard/Create">
+        <div id="stable">
+            <table width="100%" id="wit">
+                <tr>
+                    <td>
+                        <font color="black">
+                            您正在做的业务是：人力资源--薪酬标准管理--薪酬标准登记
+                        </font>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <input type="button" value="提 交" onclick="return check()" class="BUTTON_STYLE1">
+                        <input type="reset" value="返 回" class="BUTTON_STYLE1">
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" border="1" cellpadding=0 cellspacing=1
+                   bordercolorlight=#848284 bordercolordark=#eeeeee
+                   class="TABLE_STYLE1">
+                <tr>
+                    <td width="74" class="TD_STYLE1">
+                        薪酬标准编号
+                    </td>
+                    <td width="168" class="TD_STYLE2">
+                        <input type="text" name="standard.standardId" value="@ViewBag.bianhao" readonly="readonly" class="INPUT_STYLE2">
+                    </td>
+                    <td width="83" class="TD_STYLE1">
+                        薪酬标准名称
+                    </td>
+                    <td width="171" class="TD_STYLE2">
+                        <input type="text" name="standard.standardName" id="standardName" class="INPUT_STYLE2">
+                    </td>
+                    <td width="170" class="TD_STYLE1">
+                        薪酬总额
+                    </td>
+                    <td width="138" class="TD_STYLE2">
+                        <input type="text" name="standard.salarySum" id="sumSalary" value="0.0" readonly class="INPUT_STYLE2" />
+                    </td>
+                    <td width="103" class="TD_STYLE1">
+                        &nbsp;
+                    </td>
+                    <td width="95" height="26" class="TD_STYLE2">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td class="TD_STYLE1">
+                        制定人
+                    </td>
+                    <td class="TD_STYLE2">
+                        <input type="text" id="designer" name="standard.designer" class="INPUT_STYLE2">
+                    </td>
+                    <td class="TD_STYLE1">
+                        登记人
+                    </td>
+                    <td class="TD_STYLE2">
+                        <input type="text" name="standard.register" value="better_admin" readonly="readonly" class="INPUT_STYLE2">
+                    </td>
+                    <td class="TD_STYLE1">
+                        登记时间
+                    </td>
+                    <td class="TD_STYLE2">
+                        <input type="text" id="Tdate" name="standard.registTime" readonly="readonly" class="INPUT_STYLE2">
+                    </td>
+                    <td class="TD_STYLE1">
+                        &nbsp;
+                    </td>
+                    <td class="TD_STYLE2">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td class="TD_STYLE1">
+                        备注
+                    </td>
+                    <td colspan="7" class="TD_STYLE2">
+                        <textarea name="standard.remark" rows="4" class="TEXTAREA_STYLE1"></textarea>
+                    </td>
+                </tr>
+                <tr class="TD_STYLE1">
+                    <td align="center">
+                        序号
+                    </td>
+                    <td colspan="3">
+                        薪酬项目名称
+                    </td>
+                    <td>
+                        金额
+                    </td>
+                    <td colspan="3">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tbody>
+
+                    <tr class="TD_STYLE2" v-for="(item,index) in nums" :id="[index]" hidden="hidden">
+                        <td align="center">
+                            {{item.pbc_id}}
+                            <input type="hidden" :name="'details'+[index]+'.itemId'" v-model="item.pbc_id">
+                        </td>
+                        <td colspan="3">
+                            {{item.attribute_name}}
+                            @*出差补助*@
+                            <input type="hidden" :id="'details'+[index]" :name="'details'+[index]+'.attribute_name'" v-model="item.attribute_name">
+                        </td>
+                        <td>
+                            <input type="text" :id="'salary'+[index]" value="0.00" :name="'details'+[index]+'.salary'" v-on:keyup="countMoney(nums.length-1,'salary'+[index])"
+                                   class="INPUT_STYLE2">
+                        </td>
+                        <td colspan="3">
+                            &nbsp;
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+            <span v-for="(item,index) in nums" class="span">
+                <input type="checkbox" name="category" :value="[index]" id="Category" />{{item.attribute_name}}
+
+            </span>
+            <input type="button" value="按钮" onclick="static_num()" id="btnOperate" />
+            <p>
+                &nbsp;
+            </p>
+        </div>
+    </form>
+    <script type="text/javascript"> 
+
+
+        function static_num() {
+     
+            var c = 0;
+            var arr = new Array();
+            var items = document.getElementsByName("category");
+  
+            for (i = 0; i < items.length; i++) {
+          
+                if (items[i].checked) {
+                    cc(items[i].value);
+                    c = i;
+                } else {
+                    aa(items[i].value)
+                }
+            }
+            //alert(c);
+            $("#wit").append('<input type="text" hidden="hidden" id="ss" value=' + c + '>');
+            document.getElementById("ss").value = c;
+           
+        }
+
+        function cc(o) {
+            $(".span").hide();
+            $("#btnOperate").hide();
+            $("#" + o).show();
+
+        }
+        function aa(o) {
+            $("#" + o).hide();
+            $("#" + o).remove();
+        }
+		function check(){
+
+				var designer=document.getElementById("designer");
+				var standardName=document.getElementById("standardName");
+				if(designer.value.length<=0){
+				alert("制定人不可为空!!!");
+						return ;
+				}
+				if(standardName.value.length<=0){
+				alert("薪酬标准名称不可为空!!!");
+					return ;
+				}
+			document.forms[0].submit();
+		}
+		function countMoney(obj,o) {
+
+	
+
+}
+		function time(){
+ 					var tdate=document.getElementById("Tdate");
+ 					var d=new Date();
+ 					var y=d.getFullYear();
+ 					var moth=d.getMonth()+1;
+ 					var date=d.getDate();
+ 					var h=d.getHours();
+ 					var m=d.getMinutes();
+ 					var s=d.getSeconds();
+					var hh=20-1-h;
+					var mm=60-1-m;
+					var ss=60-s;
+					if(hh>0){
+							mm=mm+60*hh;
+					}
+ 					if(moth<10){
+ 							moth="0"+moth;
+ 					}
+ 					if(date<10){
+ 							date="0"+date;
+ 					}
+ 					if(h<10){
+ 							h="0"+h;
+ 					}
+ 					if(m<10){
+ 							m="0"+m;
+ 					}
+ 					if(s<10){
+ 							s="0"+s;
+ 					}
+ 					if(mm<10){
+ 							mm="0"+mm;
+ 					}
+ 					if(ss<10){
+ 							ss="0"+ss;
+ 					}
+
+ 					tdate.value=y+"-"+moth+"-"+date+" "+h+":"+m+":"+s;
+
+ 				}
+ 				window.onload=time;
+ 				var out = window.setInterval(time, 1000);
+
+
+    </script>
+</body>
+</html>
+

@@ -11,7 +11,8 @@ namespace Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    [MetadataType(typeof(config_majorValidate))]
     public partial class config_major
     {
         public short mak_id { get; set; }

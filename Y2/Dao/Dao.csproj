@@ -58,6 +58,7 @@
     <Compile Include="file_third_kindDao.cs" />
     <Compile Include="first_kindDao.cs" />
     <Compile Include="human_fileDao.cs" />
+    <Compile Include="grant_detailsDao.cs" />
     <Compile Include="LoginDao.cs" />
     <Compile Include="major.cs" />
     <Compile Include="majorDao.cs" />
@@ -69,12 +70,14 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="public_charDao.cs" />
-    <Compile Include="salary_standardDao.cs" />
-    <Compile Include="salary_standard_detailsDao.cs" />
+  
     <Compile Include="QuanXianDao.cs" />
     <Compile Include="second_kindDao.cs" />
+    <Compile Include="standardDao.cs" />
+    <Compile Include="standard_detailsDao.cs" />
     <Compile Include="third_kindDao.cs" />
     <Compile Include="usersDao.cs" />
+    <Compile Include="_fileDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj">

@@ -16,7 +16,7 @@ namespace UI
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Major_release", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "salary_grant", action = "query_locate", id = UrlParameter.Optional }
             );
         }
     }

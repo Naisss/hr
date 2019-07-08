@@ -15,13 +15,33 @@ namespace BLL
     {
         Isecond_kindDao<config_file_second_kind> s = iocCreate.second_kindDao();
 
+        public int Del(config_file_second_kind t)
+        {
+            return s.Del(t);
+        }
+
+        public int Insert(config_file_second_kind t)
+        {
+            return s.Insert(t);
+        }
+
         //二级阶段
         public List<config_file_second_kind> Select() {
             return s.SelectAll();
         }
 
-        public List<config_file_second_kind> SelectWhere(Expression<Func<config_file_second_kind, bool>> where) {
+     
+
+        public List<config_file_second_kind> selectWhere(Expression<Func<config_file_second_kind, bool>> where)
+        {
             return s.selectWhere(where);
+        }
+
+      
+
+        public int Update(config_file_second_kind t)
+        {
+            return s.Update(t);
         }
     }
 }

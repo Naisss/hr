@@ -53,6 +53,7 @@
     <Compile Include="engage_resumeBLL.cs" />
     <Compile Include="file_third_kindBll.cs" />
     <Compile Include="human_fileBLL.cs" />
+    <Compile Include="grant_detailsBLL.cs" />
     <Compile Include="LoginBll.cs" />
     <Compile Include="majorBLL.cs" />
     <Compile Include="major_changeBll.cs" />
@@ -61,11 +62,14 @@
     <Compile Include="first_kindBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="public_charBLL.cs" />
+    <Compile Include="salary_grantBLL.cs" />
     <Compile Include="QuanxianBll.cs" />
-    <Compile Include="salary_standardBLL.cs" />
-    <Compile Include="salary_standard_detailsBLL.cs" />
+   
     <Compile Include="second_kindBLL.cs" />
+    <Compile Include="standardBLL.cs" />
+    <Compile Include="standard_detailsBLL.cs" />
     <Compile Include="third_kindBLL.cs" />
+    <Compile Include="_fileBLL.cs" />
     <Compile Include="usersBLL.cs" />
   </ItemGroup>
   <ItemGroup>

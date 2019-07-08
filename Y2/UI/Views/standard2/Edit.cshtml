@@ -1,0 +1,262 @@
+﻿@model Entity.salary_standard
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="~/javascript/jquery-1.12.4.js"></script>
+    <script src="~/javascript/vue.js"></script>
+    <link rel="stylesheet" href="../../css/table.css" type="text/css" />
+    <title>无标题文档</title>
+    <script type="text/javascript">
+        $(function () {
+
+
+
+
+
+            var vm = new Vue({
+                el: "#Table",
+                data: {
+                    nums: null,
+                    mss:null,
+
+                },
+                methods: {
+                    load: function () {
+                        var t = this;
+                        $.ajax({
+                            url: "/standard/wheress",
+                            type: "get",
+                            data:"id="+@ViewBag.id,
+                            success: function (msg) {
+                                var data = eval("(" + msg + ")");
+                                var dt=data["li"];
+                                t.nums = dt;
+                                t.mss=data["li1"];
+                            }
+                        });
+                    },
+                    countMoney: function (obj, o) {
+
+                        if (isNaN(document.getElementById(o).value) || document.getElementById(o).value < 0) {
+                            alert("金额填写错误!");
+                            document.getElementById(o).value = "0.00";
+                            return;
+                        }
+                        var sum = 0;
+                        for (var i = 0; i <= obj; i++) {
+                            var salary = document.getElementById("salary" + i).value;
+                            if (salary == "") {
+                                salary = "0.00";
+                            }
+                            sum = Number(sum) + Number(salary);
+
+                        }
+                        document.getElementById("sumSalary").value = sum;
+                    }
+
+                }
+            });
+            vm.load();
+
+
+        })
+
+    </script>
+</head>
+
+<body>
+
+    <form method="post" action="/standard2/Edit">
+
+        <input type="hidden" name="standard.ssdId" value="1259">
+
+        <table width="100%">
+            <tr>
+                <td>
+                    <font color="black">您正在做的业务是:人力资源管理--薪酬标准管理--薪酬标准登记变更</font>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div align="right">
+                        <input type="button" value="重新提交" class="BUTTON_STYLE1"
+                               onclick="check()">
+                        <input type="button" value="返回" onclick="history.back();"
+                               class="BUTTON_STYLE1">
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table id="Table" width="100%" border="1" cellpadding=0 cellspacing=1
+               bordercolorlight='#848284' bordercolordark='#eeeeee'
+               class="TABLE_STYLE1">
+            <tr>
+                <td width="12%" class="TD_STYLE1">
+                    薪酬编号
+                </td>
+                <td width="15%" class="TD_STYLE2">
+                    <input type="text" name="standard_id" v-model="nums.standard_id" readonly="true" />
+                
+                </td>
+                <td width="12%" class="TD_STYLE1">
+                    薪酬标准名称
+                </td>
+                <td width="11%" class="TD_STYLE2">
+                    <input type="text" name="standard_name" id="standardName" v-model="nums.standard_name" class="INPUT_STYLE2">
+   
+                </td>
+                <td width="11%" class="TD_STYLE1">
+                    薪酬总额
+                </td>
+                <td width="17%" class="TD_STYLE2">
+                    <input type="text" name="salary_sum" v-model="nums.salary_sum" id="sumSalary" class="INPUT_STYLE2" vocab="" readonly="true">
+                
+                </td>
+                <td width="12%" class="TD_STYLE1">
+                    &nbsp;
+                </td>
+                <td width="10%" class="TD_STYLE2">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    制定人
+                </td>
+                <td class="TD_STYLE2">
+                    <input type="text" name="designer" id="designer" v-model="nums.designer" class="INPUT_STYLE2" readonly="true">
+          
+                </td>
+                <td class="TD_STYLE1">
+                    变更人
+                </td>
+                <td class="TD_STYLE2">
+                    <input type="text" name="changer" value="better_admin" class="INPUT_STYLE2" readonly="true">
+
+                </td>
+                <td class="TD_STYLE1">
+                    变更时间
+                </td>
+                <td class="TD_STYLE2">
+                    <input type="text" name="change_time" id="Tdate" class="INPUT_STYLE2" readonly="true">
+
+                </td>
+                <td class="TD_STYLE1">
+                    &nbsp;
+                </td>
+                <td class="TD_STYLE2">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                  备注
+                </td>
+                <td colspan="7" class="TD_STYLE2">
+                    <textarea name="remark" rows="4" class="INPUT_STYLE2"></textarea>
+             
+                </td>
+            </tr>
+            <tr>
+                <td class="TD_STYLE1">
+                    序号
+                </td>
+                <td colspan="3" class="TD_STYLE1">
+                    薪酬项目名称
+                </td>
+                <td colspan="4" class="TD_STYLE1">
+                    金额
+                </td>
+            </tr>
+            <tr v-for="(item,index) in mss">
+                <td align="center">
+                    <input type="hidden" :name="'details'+[index]+'.sdtId'" v-model="item.sdt_id">
+                    <input type="hidden" :name="'details'+[index]+'.item_id'" v-model="item.item_id">
+                    {{item.item_id}}
+                </td>
+                <td colspan="3">
+                    <input type="hidden" :name="'details'+[index]+'.standardId'" v-model="item.standard_id">
+                    <input type="hidden" :name="'details'+[index]+'.standardName'" v-model="item.standard_name">
+                    <input type="hidden" :name="'details'+[index]+'.itemName'" v-model="item.item_name">
+                    {{item.item_name}}
+                </td>
+                <td>
+                    <input type="text" :id="'salary'+[index]" v-model="item.salary" :name="'details'+[index]+'.salary'" v-on:keyup="countMoney(mss.length-1,'salary'+[index])" class="INPUT_STYLE2">
+
+                </td>
+                <td colspan="3">
+                    &nbsp;
+                </td>
+            </tr>
+
+        </table>
+    </form>
+    <script type="text/javascript">
+            function check(){
+
+                var designer=document.getElementById("designer");
+                var standardName=document.getElementById("standardName");
+                if(designer.value.length<=0){
+                    alert("制定人不可为空!!!");
+                    return ;
+                }
+                if(standardName.value.length<=0){
+                    alert("薪酬标准名称不可为空!!!");
+                    return ;
+                }
+                document.forms[0].submit();
+            }
+
+            function time(){
+                var tdate=document.getElementById("Tdate");
+                var d=new Date();
+                var y=d.getFullYear();
+                var moth=d.getMonth()+1;
+                var date=d.getDate();
+                var h=d.getHours();
+                var m=d.getMinutes();
+                var s=d.getSeconds();
+                var hh=20-1-h;
+                var mm=60-1-m;
+                var ss=60-s;
+                if(hh>0){
+                    mm=mm+60*hh;
+                }
+                if(moth<10){
+                    moth="0"+moth;
+                }
+                if(date<10){
+                    date="0"+date;
+                }
+                if(h<10){
+                    h="0"+h;
+                }
+                if(m<10){
+                    m="0"+m;
+                }
+                if(s<10){
+                    s="0"+s;
+                }
+                if(mm<10){
+                    mm="0"+mm;
+                }
+                if(ss<10){
+                    ss="0"+ss;
+                }
+
+                tdate.value=y+"-"+moth+"-"+date+" "+h+":"+m+":"+s;
+
+            }
+            window.onload=time;
+            var out=window.setInterval(time, 1000);
+    </script>
+</body>
+</html>

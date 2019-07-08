@@ -53,17 +53,22 @@
     <Compile Include="Iengage_resumeDao.cs" />
     <Compile Include="Ifile_third_kindDao.cs" />
     <Compile Include="Ihuman_fileDao.cs" />
+    <Compile Include="Igrant_detailsDao.cs" />
     <Compile Include="ILoginDao.cs" />
     <Compile Include="ImajorDao.cs" />
     <Compile Include="Imajor_changeDao.cs" />
     <Compile Include="Imajor_kindDao.cs" />
     <Compile Include="Imajor_releaseDao.cs" />
     <Compile Include="Ipublic_charDao.cs" />
-    <Compile Include="Isalary_standardDao.cs" />
-    <Compile Include="Isalary_standard_detailsDao.cs" />
+    <Compile Include="Isalary_grantDao.cs" />
+    
     <Compile Include="IQuanxianDao.cs" />
     <Compile Include="Isecond_kindDao.cs" />
+    <Compile Include="IstandardDao.cs" />
+    <Compile Include="Istandard_detailsDao.cs" />
+    <Compile Include="Ithird_kindDao.cs" />
     <Compile Include="Ifirst_kindDao.cs" />
+    <Compile Include="I_fileDao.cs" />
     <Compile Include="Ithird_kindDao.cs" />
     <Compile Include="IusersDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

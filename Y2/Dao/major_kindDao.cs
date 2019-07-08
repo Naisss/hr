@@ -9,6 +9,6 @@ namespace Dao
 {
     public class major_kindDao : DaoBase<config_major_kind>, Imajor_kindDao<config_major_kind>
     {
-       
+        
     }
 }

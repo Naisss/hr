@@ -1,0 +1,270 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="~/css/table.css" rel="stylesheet" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        <!--
+        .style3 {
+            color: #0000CC;
+        }
+
+        td {
+            text-align: center;
+        }
+        -->
+    </style>
+
+
+</head>
+
+<body>
+    <form method="post" action="/salary_grant/Addregister_commit">
+        @{
+            int ii = 1;
+            int i = 0;
+            List<human_file> fileList = ViewBag.fir;
+            decimal sums = 0;
+            decimal shiFa = 0;
+            for (var sum = 0; sum < fileList.Count; sum++)
+            {
+                sums += (decimal)fileList[sum].salary_sum;
+                shiFa += (decimal)fileList[sum].paid_salary_sum;
+
+            }
+        }
+        <table width="100%">
+            <tr>
+                <td colspan="2" style="text-align: left">
+                    <font color="black">
+                        您正在做的业务是：人力资源--薪酬标准管理--薪酬发放登记
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right;">
+                    <input type="submit" value="提交" class="BUTTON_STYLE1">
+                    <input type="button" value="返回" onclick="javascript:window.history.back();" class="BUTTON_STYLE1">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: left">
+                    薪酬单编号： @ViewBag.guid
+                    <input type="hidden" name="salary_grant_id" value="@ViewBag.guid">
+                
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: left">
+                    机构:II级结构
+                    <input type="hidden" name="first_kind_id" value="@fileList[0].third_kind_id">
+                    <input type="hidden" name="first_kind_name" value="Ⅰ级结构">
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left">
+                    本机构总人数:@fileList.Count
+                    <input type="hidden" name="human_amount" id="size" value="@fileList.Count">
+                    ，基本薪酬总数:@sums<input type="hidden" name="salary_standard_sum" value="@sums" />
+                    ，实发总额:<span id="salarySum_sum">@shiFa</span>
+                    <input type="hidden" id="salaryPaidSum" name="salary_paid_sum" value="@shiFa" />
+
+
+                </td>
+                <td style="text-align: right;">
+                    登记人:<input type="text" name="register" value="@fileList[0].register" size="8" readonly="readonly">
+                    登记时间：<span id="Tdate"></span>
+                    <input type="hidden" name="regist_time" id="Tdate2">
+                </td>
+            </tr>
+        </table>
+
+
+        <table width="100%" border="1" cellpadding=0 cellspacing=1
+               bordercolorlight=#848284 bordercolordark=#eeeeee
+               class="TABLE_STYLE1">
+            <tr>
+                <td class="TD_STYLE1">
+                    <span>序号</span>
+                </td>
+                <td class="TD_STYLE1">
+                    <span>档案编号</span>
+                </td>
+                <td class="TD_STYLE1">
+                    <span>姓名</span>
+                </td>
+                <td class="TD_STYLE1">
+                    工资详情
+                </td>   
+                @*<td class="TD_STYLE1">
+                    出差补助
+                </td>
+
+                <td class="TD_STYLE1">
+                    交通补贴
+                </td>
+
+                <td class="TD_STYLE1">
+                    住房补贴
+                </td>
+
+                <td class="TD_STYLE1">
+                    基本工资
+                </td>
+
+                <td class="TD_STYLE1">
+                    年终奖
+                </td>
+
+                <td class="TD_STYLE1">
+                    误餐补助
+                </td>*@
+
+                <td class="TD_STYLE1" width="7%">
+                    奖励金额
+                </td>
+                <td class="TD_STYLE1" width="7%">
+                    销售绩效总额
+                </td>
+                <td class="TD_STYLE1" width="7%">
+                    应扣金额
+                </td>
+                <td class="TD_STYLE1" width="7%">
+                    实发金额
+                </td>
+            </tr>
+            @foreach (human_file item in ViewBag.fir)
+            {
+                <tr class="TD_STYLE2">
+                    <td>
+                        @item.huf_id
+                    </td>
+                    <td>
+                        @item.human_id
+                        <input type="hidden" name="grantDetails@{ @(i)}.salary_standard_sum" value="@item.salary_sum" />
+                        <input type="hidden" name="grantDetails@{ @(i)}.human_id" value="@item.human_id" />
+                        <input type="hidden" name="salary_standard_id@{ @(i)}" value="@fileList[0].salary_standard_id">
+                    </td>
+                    <td>
+                        @item.human_name
+                        <input type="hidden" name="grantDetails@{ @(i)}.humanName" value="@item.human_name" />
+                        <input type="hidden" name="grantDetails@{ @(i)}.salary_grant_id" value="@item.salary_standard_id" />
+                        <input type="hidden" id="salaryStandardSum@(ii)" name="grantDetails[@{ @(i)}].salaryStandardSum" value="@item.paid_salary_sum" />
+                    </td>
+                    <td>
+                        <a href='/salary_grant/xq/@item.salary_standard_id'>查看薪酬详情</a>
+                    </td>
+                    <td>
+                        @*奖励金额*@
+                        <input type="text" name="grantDetails@{ @(i)}.bounsSum" id="bounsSum@(ii)" onkeyup="onKeyPress('@(ii)')" class="INPUT_STYLE2" />
+                    </td>
+                    <td>
+                        @*销售绩效总额*@
+                        <input type="text" name="grantDetails@{ @(i)}.saleSum" id="saleSum@(ii)" onkeyup="onKeyPress('@(ii)')" class="INPUT_STYLE2" />
+                    </td>
+                    <td>
+                        @*银扣金额*@
+                        <input type="text" name="grantDetails@{ @(i)}.deductSum" id="deductSum@(ii)" onkeyup="onKeyPress('@(ii)')" class="INPUT_STYLE2" />
+                    </td>
+                    <td>
+                        @*实发金额*@
+                        <input type="text" name="grantDetails@{ @(i)}.salaryPaidSum" readonly="readonly" id="salaryPaidSum@(ii)" value="@item.paid_salary_sum" class="INPUT_STYLE2" />
+                    </td>
+
+                </tr>
+        ii++;
+        i++;
+    }
+        </table>
+
+    </form>
+    <SCRIPT type="text/javascript">
+
+		function onKeyPress(i){
+
+		    var size=document.getElementById("size").value;
+		var bounsSum=document.getElementById("bounsSum"+i);
+		var saleSum =document.getElementById("saleSum"+i);
+		var deductSum=document.getElementById("deductSum"+i);
+		var salaryPaidSum=document.getElementById("salaryPaidSum"+i);
+		if (isNaN(bounsSum.value) || bounsSum.value < 0) {
+		alert("金额填写错误!");
+		bounsSum.value="0.00";
+		return;
+	}
+		if (isNaN(saleSum.value) || saleSum.value < 0) {
+		alert("金额填写错误!");
+		saleSum.value="0.00";
+		return;
+	}
+		if (isNaN(deductSum.value) || deductSum.value < 0) {
+		alert("金额填写错误!");
+		deductSum.value="0.00";
+		return;
+	}
+		salaryPaidSum.value=Number(bounsSum.value)+Number(saleSum.value)-Number(deductSum.value)+Number(document.getElementById("salaryStandardSum"+i).value);
+
+		var sum=0;
+		for(var j=1;j<=size;j++){
+		    sum = Number(sum) + Number(document.getElementById("salaryPaidSum" + j).value);
+
+
+		}
+		       document.getElementById("salarySum_sum").innerHTML = sum;
+		       document.getElementById("salaryPaidSum").value = sum;
+
+		}
+
+
+
+		function time(){
+ 					var tdate=document.getElementById("Tdate");
+ 					var d=new Date();
+ 					var y=d.getFullYear();
+ 					var moth=d.getMonth()+1;
+ 					var date=d.getDate();
+ 					var h=d.getHours();
+ 					var m=d.getMinutes();
+ 					var s=d.getSeconds();
+					var hh=20-1-h;
+					var mm=60-1-m;
+					var ss=60-s;
+					if(hh>0){
+							mm=mm+60*hh;
+					}
+ 					if(moth<10){
+ 							moth="0"+moth;
+ 					}
+ 					if(date<10){
+ 							date="0"+date;
+ 					}
+ 					if(h<10){
+ 							h="0"+h;
+ 					}
+ 					if(m<10){
+ 							m="0"+m;
+ 					}
+ 					if(s<10){
+ 							s="0"+s;
+ 					}
+ 					if(mm<10){
+ 							mm="0"+mm;
+ 					}
+ 					if(ss<10){
+ 							ss="0"+ss;
+ 					}
+
+ 					tdate.innerHTML=y+"-"+moth+"-"+date+" "+h+":"+m+":"+s;
+					 document.getElementById("Tdate2").value=tdate.innerHTML;
+ 				}
+ 				window.onload=time;
+ 				var out=window.setInterval(time, 1000);
+    </SCRIPT>
+</body>
+</html>

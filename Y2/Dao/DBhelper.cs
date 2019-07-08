@@ -34,7 +34,7 @@ namespace Dao
 
         private static SqlConnection GetConnection()
         {
-            SqlConnection cn = new SqlConnection("server =.;database =HR;uid = sa;pwd = root");
+            SqlConnection cn = new SqlConnection("Data Source=.;Initial Catalog=HR;Integrated Security=True");
             return cn;
         }
 
