@@ -86,7 +86,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Http">
+      <HintPath>G:\hr\Y2\UI\bin\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -817,6 +819,7 @@
     <Content Include="images\images\salary_standard1.gif" />
     <Content Include="images\images\training.gif" />
     <Content Include="images\images\training1.gif" />
+    <Content Include="images\img\34c8d3e5a6dd402dca21e31dab003fa1.jpg" />
     <Content Include="images\img\b7be29c9d115d064a3ac17a371fe9116.jpg" />
     <Content Include="images\jt0.gif" />
     <Content Include="images\loading.gif" />
@@ -1376,6 +1379,7 @@
     <Content Include="jquery-easyui-1.3.5\metro\tree.css" />
     <Content Include="jquery-easyui-1.3.5\metro\validatebox.css" />
     <Content Include="jquery-easyui-1.3.5\metro\window.css" />
+    <Content Include="left.html" />
     <Content Include="main.html" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
@@ -1483,6 +1487,23 @@
     <Content Include="Views\Human_file\index6.cshtml" />
     <Content Include="Views\Human_file\HuiFu_human_xijie.cshtml" />
     <Content Include="Views\Human_file\index7.cshtml" />
+    <Content Include="Views\Quanxian\Add.cshtml" />
+    <Content Include="Views\Quanxian\AddJs.cshtml" />
+    <Content Include="Views\Quanxian\information.cshtml" />
+    <Content Include="Views\Quanxian\List.cshtml" />
+    <Content Include="Views\Quanxian\Success.cshtml" />
+    <Content Include="Views\Quanxian\Update.cshtml" />
+    <Content Include="Views\Quanxian\Users.cshtml" />
+    <Content Include="Views\major_change\CK.cshtml" />
+    <Content Include="Views\major_change\CX.cshtml" />
+    <Content Include="Views\major_change\DDSH.cshtml" />
+    <Content Include="Views\major_change\Index.cshtml" />
+    <Content Include="Views\major_change\list.cshtml" />
+    <Content Include="Views\major_change\locate.cshtml" />
+    <Content Include="Views\major_change\major_changeUpdate.cshtml" />
+    <Content Include="Views\major_change\SH.cshtml" />
+    <Content Include="Views\major_change\SHSuccess.cshtml" />
+    <Content Include="Views\major_change\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -33,7 +33,8 @@ namespace UI.Controllers
          //   ViewBag.s2 = list2;
          //   ViewBag.s3 = list3;
             ViewBag.s4 = list4;
-
+            users u = (users)Session["getuser"];
+            ViewBag.user = u.u_true_name;
             return View();
         }
         //二级

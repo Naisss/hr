@@ -15,23 +15,19 @@ namespace UI.Controllers
 {
     public class major_changeController : Controller
     {
-        Ihuman_fileBll hf = iocCreate.CreateTextBll<Ihuman_fileBll>("human_fileBll");
+    
+        Ihuman_fileBll hf = iocCreate.CreateTextBll<Ihuman_fileBll>("human_fileBLL");
         Imajor_changeBll mb = iocCreate.CreateTextBll<Imajor_changeBll>("major_changeBll");
         Ifile_third_Bll ib = iocCreate.CreateTextBll<Ifile_third_Bll>("file_third_kindBll");
         // GET: major_change
         public ActionResult Index()
         {
-            String sql = "select first_kind_id,first_kind_name   from human_file ";
+            String sql = "select first_kind_id,first_kind_name  from  dbo.config_file_first_kind";
             DataTable dt = DBhelper.Select(sql, "");
             ViewBag.first = dt;
 
-            String sql1 = "select second_kind_id,second_kind_name   from human_file ";
-            DataTable dt1 = DBhelper.Select(sql1, "");
-            ViewBag.second = dt1;
-
-            String sql2 = "select third_kind_id,third_kind_name   from human_file ";
-            DataTable dt2 = DBhelper.Select(sql2, "");
-            ViewBag.third = dt2;
+         
+          
 
 
             //List<config_file_third_kind> list = ib.SelectAll();
@@ -39,6 +35,28 @@ namespace UI.Controllers
             DataTable dthuman_file = DBhelper.Select(sqlhuman_file,"");
             return View(dthuman_file);
         }
+
+        //二级阶段
+        public ActionResult GetbyYid(string id)
+        {
+
+            String sql =string.Format("select * from  dbo.config_file_second_kind where first_kind_id='{0}'",id);
+            DataTable dt = DBhelper.Select(sql, "");
+          
+
+            return Content(JsonConvert.SerializeObject(dt));
+        }
+        //三级阶段
+        public ActionResult GetbyEid(string id, string yid)
+        {
+
+            String sql =string.Format("select * from  dbo.config_file_third_kind where first_kind_id='{0}' and second_kind_id='{1}'", yid,id);
+            DataTable dt = DBhelper.Select(sql, "");
+
+            return Content(JsonConvert.SerializeObject(dt));
+        }
+
+
         public ActionResult CX()
         {
             var startDate = Request["startDate"];
@@ -71,7 +89,7 @@ namespace UI.Controllers
             //}
             if (fn=="0"&& startDate==""&&endDate=="")
             {
-                where = "where check_status=0";
+                where = "where check_status=1";
                 SqlParameter[] ps =
                 {
                 new SqlParameter(){ParameterName="@pageSize",Value=2},
@@ -92,7 +110,7 @@ namespace UI.Controllers
             }
             else   if (fn!="0"&&sn!="0"&&tn!="0"&&startDate != null && endDate != null)
             {
-                where = "where regist_time>'" + startDate + "' and regist_time< '" + endDate + "' and first_kind_id="+fn+ "and second_kind_id="+sn+ "and third_kind_id="+tn+ "and  check_status=0";
+                where = "where regist_time>'" + startDate + "' and regist_time< '" + endDate + "' and first_kind_id="+fn+ "and second_kind_id="+sn+ "and third_kind_id="+tn+ "and  check_status=1";
                 SqlParameter[] ps =
                 {
                 new SqlParameter(){ParameterName="@pageSize",Value=2},
@@ -216,34 +234,38 @@ namespace UI.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public  ActionResult major_changeUpdate(int  id)
         {
+            
             //major_change mc = mb.selectWhere(e => e.mch_id == id).FirstOrDefault();
-            human_file h = hf.selectWhere(e => e.huf_id == id ).FirstOrDefault(); 
+            human_file h = hf.SelectWhere(e => e.huf_id == id ).FirstOrDefault(); 
             String sql = "select * from config_major_kind ";
             DataTable dt = DBhelper.Select(sql, "");
             ViewBag.dt = dt;
 
+
             String sql1 = "select * from config_major ";
             DataTable dt1 = DBhelper.Select(sql1, "");
             ViewBag.dt1 = dt1;
-
+            users u=(users)Session["getuser"];
+            ViewBag.user = u.u_true_name;
 
             String sql2 = "select * from salary_standard ";
             DataTable dt2 = DBhelper.Select(sql2, "");
             ViewBag.dt2 = dt2;
 
-            string sql3 = "select * from config_file_third_kind ";
+            string sql3 = "select * from dbo.config_file_first_kind ";
             DataTable dt3 = DBhelper.Select(sql3, "");
             ViewBag.dt3 = dt3;
             return View(h);
         }
 
         [HttpPost]
-        public ActionResult major_changeUpdate(major_change  MCG)
+        public ActionResult major_changeUpdate(major_change  MCG,int huid)
         {
             MCG.check_status = 1;
             if (mb.Insert(MCG) > 0)
             {
-                string sql = string.Format("update human_file set check_status = 1 where huf_id='{0}'",MCG.mch_id);
+
+                string sql = string.Format("update human_file set check_status = 2 where huf_id='{0}'",huid);
                 DBhelper.InsertUpdateDelte(sql,"");
                 return Content("<script>window.location.href='/major_change/Success'</script>");
             }
@@ -267,7 +289,8 @@ namespace UI.Controllers
             String sql2 = "select * from salary_standard ";
             DataTable dt2 = DBhelper.Select(sql2, "");
             ViewBag.dt2 = dt2;
-            
+            users u = (users)Session["getuser"];
+            ViewBag.user = u.u_true_name;
             string sql3 = "select * from config_file_third_kind ";
             DataTable dt3 = DBhelper.Select(sql3, "");
             ViewBag.dt3 = dt3;
@@ -294,7 +317,7 @@ namespace UI.Controllers
         }
         public ActionResult locate()
         {
-            String sql = "select first_kind_id,first_kind_name   from major_change ";
+            String sql = "select first_kind_id,first_kind_name   from dbo.config_file_first_kind";
             DataTable dt = DBhelper.Select(sql, "");
             ViewBag.first = dt;
 
@@ -333,14 +356,15 @@ namespace UI.Controllers
         public ActionResult FindTwo()
         {
             string firstid = HttpContext.Request["firstid"];
-            String sql =string.Format("select second_kind_id,second_kind_name from major_change  where first_kind_id ='{0}'", firstid);
+            String sql =string.Format("select second_kind_id,second_kind_name from dbo.config_file_second_kind  where first_kind_id ='{0}'", firstid);
             DataTable dt = DBhelper.Select(sql, "");
             return Content(JsonConvert.SerializeObject(dt));
         }
         public ActionResult FindThree()
         {
             string secondid = HttpContext.Request["secondid"];
-            String sql = string.Format("select third_kind_id,third_kind_name from major_change  where second_kind_id ='{0}'", secondid);
+            string firstid = HttpContext.Request["firstid"];
+            String sql = string.Format("select third_kind_id,third_kind_name from dbo.config_file_third_kind  where second_kind_id ='{0}' and first_kind_id='{1}'", secondid, firstid);
             DataTable dt = DBhelper.Select(sql, "");
             return Content(JsonConvert.SerializeObject(dt));
         }
@@ -348,14 +372,14 @@ namespace UI.Controllers
         public   ActionResult FindMajor()
         {
             string tid = HttpContext.Request["thirdKindId"];
-            string sql = string.Format("select major_kind_id,major_kind_name from major_change  where third_kind_id = '{0}'", tid);
+            string sql = string.Format("select major_kind_id,major_kind_name from dbo.config_major_kind ");
             DataTable   dt  =DBhelper.Select(sql, "");
             return Content(JsonConvert.SerializeObject(dt));
         }
         public ActionResult FindMid()
         {
             string mkid = HttpContext.Request["mkid"];
-            string sql = string.Format("select major_id,major_name from major_change  where major_kind_id = '{0}'", mkid);
+            string sql = string.Format("select major_id,major_name from config_major  where major_kind_id = '{0}'", mkid);
             DataTable dt = DBhelper.Select(sql, "");
             return Content(JsonConvert.SerializeObject(dt));
         }
@@ -433,6 +457,8 @@ namespace UI.Controllers
         public   ActionResult CK(int  id)
         {
             major_change mc = mb.selectWhere(e => e.mch_id == id).FirstOrDefault();
+            users u =(users)Session["getuser"];
+            ViewBag.user = u.u_true_name;
             return View(mc);
         }
         // POST: major_change/Edit/5

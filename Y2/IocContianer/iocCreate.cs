@@ -37,11 +37,19 @@ namespace IocContianer
         }
 
         //第三阶段
-        public static Ithird_kindDao<config_file_third_kind> third_kindDao()
+        public static Ifile_third_kindDao<config_file_third_kind> third_kindDao()
         {
             UnityContainer ioc = new UnityContainer();
-            ioc.RegisterType<Ithird_kindDao<config_file_third_kind>, third_kindDao>();
-            return ioc.Resolve<Ithird_kindDao<config_file_third_kind>>();
+            ioc.RegisterType<Ifile_third_kindDao<config_file_third_kind>, file_third_kindDao>();
+            return ioc.Resolve<Ifile_third_kindDao<config_file_third_kind>>();
+        }
+
+        //第三阶段2
+        public static Ithird_kindDao third_kindDao2()
+        {
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Ithird_kindDao, third_kindDao>();
+            return ioc.Resolve<Ithird_kindDao>();
         }
 
         //职位分类
@@ -149,6 +157,20 @@ namespace IocContianer
             ioc.RegisterType<Isalary_standardDao, salary_standardDao>();
             return ioc.Resolve<Isalary_standardDao>();
 
+        }
+
+
+        public static Imajor_changeDao<major_change> CreateImajor_changeDao()
+        {
+            IUnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Imajor_changeDao<major_change>, major_changeDao>();
+            return ioc.Resolve<Imajor_changeDao<major_change>>();
+        }
+        public static IQuanxianDao CreateQuanXianDao()
+        {
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<IQuanxianDao, QuanXianDao>();
+            return ioc.Resolve<IQuanxianDao>();
         }
 
         //bll通用

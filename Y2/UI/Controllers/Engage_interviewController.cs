@@ -121,7 +121,9 @@ namespace UI.Controllers
          
 
             ViewBag.er = er;
-            ViewBag.user = "lisi";
+            users u = (users)Session["getuser"];
+            ViewBag.user = u.u_true_name;
+           
             engage_interview ei= ieib.SelectWhere(e=>e.resume_id==id).FirstOrDefault();
       
             if (ei == null)

@@ -55,6 +55,7 @@
     <Compile Include="DBhelper.cs" />
     <Compile Include="engage_interviewDao.cs" />
     <Compile Include="engage_resumeDao.cs" />
+    <Compile Include="file_third_kindDao.cs" />
     <Compile Include="first_kindDao.cs" />
     <Compile Include="human_fileDao.cs" />
     <Compile Include="LoginDao.cs" />

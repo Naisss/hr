@@ -43,6 +43,15 @@
             src="../../../javascript/comm/time.js">
     </script>
     <script>
+        $(function () {
+
+           var s= $("#sxr").val();
+           if (s == "") {
+               alert('请选择筛选人！！');
+               return;
+           }
+        });
+
     function tick() {
     var now = new Date();
     var hours, minutes, seconds, noon;
@@ -458,8 +467,8 @@
                 </td>
                 <td class="TD_STYLE2">
                     @{ List<users> us = ViewBag.us;}
-                     <select name="checker" style="width:120px;">
-                         <option>--请选择--</option>
+                     <select name="checker" id="sxr" style="width:120px;">
+                         <option value="">--请选择--</option>
                          @foreach (var item in us)
                          {
                             <option value="@item.u_true_name">@item.u_true_name</option>

@@ -63,8 +63,8 @@
     <Compile Include="Isalary_standard_detailsDao.cs" />
     <Compile Include="IQuanxianDao.cs" />
     <Compile Include="Isecond_kindDao.cs" />
-    <Compile Include="Ithird_kindDao.cs" />
     <Compile Include="Ifirst_kindDao.cs" />
+    <Compile Include="Ithird_kindDao.cs" />
     <Compile Include="IusersDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TSelectUpdateDelete.cs" />

@@ -18,7 +18,7 @@ namespace UI.Controllers
         Ipublic_charBLL ipcb = iocCreate.CreateTextBll<Ipublic_charBLL>("public_charBLL");
         ImajorBLL imb = iocCreate.CreateTextBll<ImajorBLL>("majorBLL");
         Imajor_kindBLL imkb = iocCreate.CreateTextBll<Imajor_kindBLL>("major_kindBLL");
-        Ihuman_fileBLL ihdb = iocCreate.CreateTextBll<Ihuman_fileBLL>("human_fileBLL");
+        Ihuman_fileBll ihdb = iocCreate.CreateTextBll<Ihuman_fileBll>("human_fileBLL");
         Isecond_kindBLL iskb = iocCreate.CreateTextBll<Isecond_kindBLL>("second_kindBLL");
         Ithird_kindBLL itkb = iocCreate.CreateTextBll<Ithird_kindBLL>("third_kindBLL");
         Ifirst_kindBLL ifkb = iocCreate.CreateTextBll<Ifirst_kindBLL>("first_kindBLL");
@@ -69,7 +69,8 @@ namespace UI.Controllers
             ViewBag.xinchou = issdb.Select();
             ViewBag.yiji = ifkb.SelectAll();
             ViewBag.fl = imkb.Select();
-            ViewBag.user = "lisi";
+            users u = (users)Session["getuser"];
+            ViewBag.user =u.u_true_name;
             human_file h = ihdb.SelectWhere(e => e.huf_id == id).FirstOrDefault();
             return View(h);
         }
@@ -357,7 +358,7 @@ namespace UI.Controllers
             if (Session["where"] == null)
             {
 
-                where2 = e => e.check_status == 1;
+                where2 = e => e.check_status >= 1;
             }
             else {
                 Dictionary<string, object> di = (Dictionary<string, object>) Session["where"];
@@ -683,7 +684,7 @@ namespace UI.Controllers
         {
             int rows;
             Expression<Func<human_file, bool>> where2 = null;
-            where2 = e => e.check_status == 1;
+            where2 = e => e.check_status >= 1;
             var data = ihdb.SelectFenYe(e => e.huf_id, where2, out rows, currentpage, 2);
             Dictionary<string, object> dtion = new Dictionary<string, object>();
             dtion.Add("data", data);

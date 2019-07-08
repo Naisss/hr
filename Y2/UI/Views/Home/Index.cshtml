@@ -32,7 +32,7 @@
                         } else {
                             $('#tabs').tabs('add', {
                                 title: text,
-                                content: '<iframe src=' + url + ' width="1490px" height="600px" />',
+                                content: '<iframe src=' + url + ' width="1141px" height="500px" /></iframe>',
                                 closable: true,
                                 tools: [{
                                     iconCls: 'icon-mini-refresh',
@@ -49,8 +49,22 @@
     </script>
 </head>
 <body class="easyui-layout">
-    <div data-options="region:'north',title:'',split:true" style="height:165px;">
-        <iframe src="top.html" width="99%" height="155px"></iframe>
+    <div data-options="region:'north',title:'',split:true" style="height:100px;background-color:#FFD553;">
+        <table style="width: 70%; margin-left: 30%;">
+            <tr>
+                <td style="text-align: right;width:30%">
+                    <p style="font-size: 40px; margin: 0; color: white; filter:progid:DXImageTransform.Microsoft.Shadow(color=black,direction=120,strength=5); text-shadow: 4px 4px 15px black;">
+                        人力资源管理系统
+                    </p>
+                </td>
+                <td style="text-align: right;font-size:17px;width:35%;color:black;">
+                    <br />
+                    @{var user = ViewBag.user;}
+                    欢迎你：@user&nbsp;
+                    <input type="button" value="退出系统" class="BUTTON_STYLE1" onclick="parent.location.href = '/Login/Index'" />&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+            </tr>
+        </table>
     </div>
 
     <div data-options="region:'west',title:'West',split:true" style="width:200px;">
@@ -58,8 +72,8 @@
     </div>
 
     <div data-options="region:'center',title:'center title'"  style="padding:5px;background:#eee;" >
-        <div id="tabs" class="easyui-tabs" style="width:1495px;height:620px;">
-            <iframe src="main.html" width="99%" height="550px"></iframe>
+        <div id="tabs" class="easyui-tabs" style="width:1155px;height:510px;">
+            @*<iframe src="main.html" width="99%" height="550px"></iframe>*@
         </div>
 
     </div>

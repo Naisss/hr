@@ -22,7 +22,7 @@ namespace UI.Controllers
         ImajorBLL imb = iocCreate.CreateTextBll<ImajorBLL>("majorBLL");
         Imajor_kindBLL imkb = iocCreate.CreateTextBll<Imajor_kindBLL>("major_kindBLL");
         Iengage_interviewBLL ieib = iocCreate.CreateTextBll<Iengage_interviewBLL>("engage_interviewBLL");
-        Ihuman_fileBLL ihdb = iocCreate.CreateTextBll<Ihuman_fileBLL>("human_fileBLL");
+        Ihuman_fileBll ihdb = iocCreate.CreateTextBll<Ihuman_fileBll>("human_fileBLL");
         IusersBLL iub = iocCreate.CreateTextBll<IusersBLL>("usersBLL");
         // GET: Engage_resume
         //主页
@@ -37,7 +37,9 @@ namespace UI.Controllers
             ViewBag.zhuanye = ipcb.SelectWhere(e => e.attribute_kind == "专业");
             ViewBag.techang = ipcb.SelectWhere(e => e.attribute_kind == "特长");
             ViewBag.aihao = ipcb.SelectWhere(e => e.attribute_kind == "爱好");
-            ViewBag.user = "admin";
+            users u = (users)Session["getuser"];
+            ViewBag.user = u.u_true_name;
+           
             if (me.mre_id == 0) {
                 Session["zpid"] = null;//走了两遍
             }
@@ -290,7 +292,9 @@ namespace UI.Controllers
             // ViewBag.er2 = er;
             engage_interview ei = ieib.SelectWhere(e => e.resume_id == id).FirstOrDefault();
             ViewBag.ei2 = ei;
-            ViewBag.us = "lisi";
+            users u = (users)Session["getuser"];
+            
+            ViewBag.us = u.u_true_name;
             return View(er);
 
         }
@@ -406,7 +410,8 @@ namespace UI.Controllers
                 engage_resume er = ierb.SelectWhere(e => e.res_id == ersh.res_id).FirstOrDefault();
                 er.pass_check_status = 1;
                 er.interview_status = 4;
-                er.pass_checker = "lisi";
+                users u = (users)Session["getuser"];
+                er.pass_checker = u.u_true_name;
                 er.pass_passComment = ersh.pass_passComment;
                 ierb.Update(er);
                 int id = Convert.ToInt32(Session["zpid"]);

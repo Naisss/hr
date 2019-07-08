@@ -20,8 +20,11 @@ namespace UI.Controllers
         [Login]
         public ActionResult DL(users u)
         {
+
             object user = ib.login(u.u_name, u.u_password);
             object u_roleid = ib.u_roleidSelect(u.u_name,u.u_password);
+            users userss = ib.Getuser(u.u_name, u.u_password);
+            Session["getuser"] = userss;
             Session["user"] = user;
             Session["u_roleid"] = u_roleid;
             return RedirectToAction("Index", "Home");

@@ -11,5 +11,7 @@ namespace IDao
     {
         object login(string name, string pwd);//登录
         object u_roleidSelect(string name,string  pwd);
+
+        users Getuser(string name, string pwd);
     }
 }

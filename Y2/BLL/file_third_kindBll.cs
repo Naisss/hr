@@ -11,7 +11,7 @@ namespace BLL
 {
     public class file_third_kindBll:Ifile_third_Bll
     {
-        Ifile_third_kindDao<config_file_third_kind> ifd = iocCreate.Createfile_third_kindDao();
+        Ifile_third_kindDao<config_file_third_kind> ifd = iocCreate.third_kindDao();
         public List<config_file_third_kind> SelectAll()
         {
             return ifd.SelectAll();

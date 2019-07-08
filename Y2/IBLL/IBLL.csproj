@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Iengage_interviewBLL.cs" />
     <Compile Include="Iengage_resumeBLL.cs" />
+    <Compile Include="Ifile_third_Bll.cs" />
     <Compile Include="Ifirst_kindBLL.cs" />
     <Compile Include="Ihuman_fileBLL.cs" />
     <Compile Include="ImajorBLL.cs" />

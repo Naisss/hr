@@ -13,7 +13,7 @@ namespace BLL
 {
     public class third_kindBLL:Ithird_kindBLL
     {
-        Ithird_kindDao<config_file_third_kind> i = iocCreate.third_kindDao();
+        Ithird_kindDao i = iocCreate.third_kindDao2();
 
         public List<config_file_third_kind> Select() {
             return i.SelectAll();

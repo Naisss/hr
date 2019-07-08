@@ -22,6 +22,7 @@
                type: "post",
                data:{cr:currentPage},
                success: function (data) {
+                   console.log(data);
                    var di = eval("(" + data + ")");
                    var dt = di["dt"];
                    pages = di["pages"];

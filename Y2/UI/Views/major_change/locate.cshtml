@@ -14,7 +14,8 @@
     <script src="~/javascript/list.js"></script>
     <script src="~/javascript/jquery-1.7.2.js"></script>
     <script src="~/javascript/calendar-ch.js"></script>
-    <script src="~/javascript/time.js"></script>
+
+    <script src="~/javascript/comm/time.js"></script>
     <link href="~/css/cwcalendar.css" rel="stylesheet" />
 </head>
 <body>
@@ -98,7 +99,7 @@
 			var mkd = $("#newMajorKindId");
 	 	    second.change(function(){
 	 	        $.ajax({
-	 	            url: "/major_change/FindThree/null?secondid=" + $('#secondKindId option:selected').val(),
+	 	            url: "/major_change/FindThree/null?secondid=" + $('#secondKindId option:selected').val() + "&&firstid=" + $('#firstKindId option:selected').val(),
 	 	            type: "post",
 	 	            success: function (data) {
 	 	                var data = eval("(" + data + ")");
@@ -118,7 +119,7 @@
 	 	    })
 	 	    third.change(function () {
 	 	        $.ajax({
-	 	            url: "/major_change/FindMajor/null?thirdKindId=" + $('#thirdKindId option:selected').val(),
+	 	            url: "/major_change/FindMajor",
 	 	            type: "post",
 	 	            success: function (data) {
 	 	                var data = eval("(" + data + ")");

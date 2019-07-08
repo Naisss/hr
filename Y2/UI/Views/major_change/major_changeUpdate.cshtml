@@ -60,12 +60,13 @@
     </SCRIPT>
 </head>
 <body>
+    
     <form method="post" action="/major_change/major_changeUpdate">
         <table width="100%">
             <tr>
                 <td>
                     <font color="#0000CC">您正在做的业务是:人力资源--调动管理--调动登记</font>
-                     <input type="hidden" name="mch_id" value=@Model.huf_id>
+                     <input type="hidden" name="huid" value=@Model.huf_id>
                 </td>
             </tr>
             <tr>
@@ -199,52 +200,52 @@
                             });
                         });
                         $(function () {
-                            var first = $("#firstKindId");
-                            var second = $("#secondKindId");
-                            var third = $("#thirdKindId");
+                        //    var first = $("#firstKindId");
+                        //    var second = $("#secondKindId");
+                        //    var third = $("#thirdKindId");
                             var zhikind = $("#newMajorKindId");
                             var zhiname = $("#newMajorId");
-                            var xinchou = $("#newSalaryStandardId");
-                            var xinchousum = $("#newSalarySum");
+                           var xinchou = $("#newSalaryStandardId");
+                          var xinchousum = $("#newSalarySum");
 
-                            first.change(function () {
-                                $.ajax({
-                                    url: "/major_change/Find2ji/null?firstid=" + $('#firstKindId option:selected').val(),
-                                    type: "post",
-                                    success: function (data) {
-                                        var data = eval("(" + data + ")");
-                                        second.empty();
-                                        second.append("<option value='0' selected='selected'>-----请选择-----</option>");
-                                        for (var i = 0; i < data.length; i++) {
-                                            second.append("<option value='" + data[i]["second_kind_id"] + "'>" + data[i]["second_kind_name"] + "</option>");
-                                        }
-                                    }
-                                });
-                                if (first.val() == '0') {
-                                    third.empty();
-                                    second.empty();
-                                    third.append("<option value='0'selected='selected'>-----请选择-----</option>");
-                                    second.append("<option value='0'selected='selected'>-----请选择-----</option>")
-                                }
-                            });
-                            second.change(function () {
-                                $.ajax({
-                                    url: "/major_change/Find3ji/null?secondid=" + $('#secondKindId option:selected').val(),
-                                    type: "post",
-                                    success: function (data) {
-                                        var data = eval("(" + data + ")");
-                                        third.empty();
-                                        third.append("<option value='0' selected='selected'>-----请选择-----</option>");
-                                        for (var i = 0; i < data.length; i++) {
-                                            third.append("<option value='" + data[i]["third_kind_id"] + "'>" + data[i]["third_kind_name"] + "</option>");
-                                        }
-                                    }
-                                });
-                                if (second.val() == '0') {
-                                    third.empty();
-                                    third.append("<option value='0'selected='selected'>-----请选择-----</option>");
-                                }
-                            });
+                        //    first.change(function () {
+                        //        $.ajax({
+                        //            url: "/major_change/Find2ji/null?firstid=" + $('#firstKindId option:selected').val(),
+                        //            type: "post",
+                        //            success: function (data) {
+                        //                var data = eval("(" + data + ")");
+                        //                second.empty();
+                        //                second.append("<option value='0' selected='selected'>-----请选择-----</option>");
+                        //                for (var i = 0; i < data.length; i++) {
+                        //                    second.append("<option value='" + data[i]["second_kind_id"] + "'>" + data[i]["second_kind_name"] + "</option>");
+                        //                }
+                        //            }
+                        //        });
+                        //        if (first.val() == '0') {
+                        //            third.empty();
+                        //            second.empty();
+                        //            third.append("<option value='0'selected='selected'>-----请选择-----</option>");
+                        //            second.append("<option value='0'selected='selected'>-----请选择-----</option>")
+                        //        }
+                        //    });
+                        //    second.change(function () {
+                        //        $.ajax({
+                        //            url: "/major_change/Find3ji/null?secondid=" + $('#secondKindId option:selected').val(),
+                        //            type: "post",
+                        //            success: function (data) {
+                        //                var data = eval("(" + data + ")");
+                        //                third.empty();
+                        //                third.append("<option value='0' selected='selected'>-----请选择-----</option>");
+                        //                for (var i = 0; i < data.length; i++) {
+                        //                    third.append("<option value='" + data[i]["third_kind_id"] + "'>" + data[i]["third_kind_name"] + "</option>");
+                        //                }
+                        //            }
+                        //        });
+                        //        if (second.val() == '0') {
+                        //            third.empty();
+                        //            third.append("<option value='0'selected='selected'>-----请选择-----</option>");
+                        //        }
+                        //    });
                             zhikind.change(function () {
                                 $.ajax({
                                     url: "/major_change/FindMJ/null?mkid=" + $("#newMajorKindId  option:selected").val(),
@@ -277,6 +278,41 @@
                                 }
                             });
                         });
+
+                        function SelectEid() {
+
+                            var yid = $("#firstKindId").val();
+                            //   alert(yid);
+                            $.get("/major_change/GetbyYid/" + yid, function (da) {
+                                //console.log(data);
+                                $("#secondKindId option:gt(0)").remove();
+                                var data = eval(da);
+
+                                for (var i = 0; i < data.length; i++) {
+
+                                    var $option = $('<option value="' + data[i]["second_kind_id"] + '" sid="' + data[i]["first_kind_id"] + '">' + data[i]["second_kind_name"] + '</option>');
+
+                                    $("#secondKindId").append($option);
+                                }
+                            }, "json");
+                            SelectSid();
+                        }
+                        function SelectSid() {
+
+                            var eid = $("#secondKindId").val();
+
+                            var yid = $("#firstKindId").val();
+                            // alert(yid);
+                            $.get("/major_change/GetbyEid/" + eid + "?yid=" + yid, function (data) {
+
+                                $("#thirdKindId option:gt(0)").remove();
+
+                                for (var i = 0; i < data.length; i++) {
+                                    var $option = $('<option value="' + data[i]["third_kind_id"] + '">' + data[i]["third_kind_name"] + '</option>');
+                                    $("#thirdKindId").append($option);
+                                }
+                            }, "json");
+                        }
                     </script>
                     @{
                         DataTable dt = ViewBag.dt;//分类
@@ -284,7 +320,7 @@
                         DataTable dt2 = ViewBag.dt2;//薪资标准
                         DataTable dt3 = ViewBag.dt3;//新机构
                     }
-                    <select style="width:160px" name="new_first_kind_id" id="firstKindId" size="1" class="SELECT_STYLE2">
+                    <select style="width:160px" name="new_first_kind_id" id="firstKindId" size="1" onchange="SelectEid();" class="SELECT_STYLE2">
                         <option value="0">-----请选择-----</option>
                         @foreach (DataRow dr in dt3.Rows)
                         {
@@ -297,12 +333,9 @@
                     新二级机构名称
                 </td>
                 <td class="TD_STYLE2">
-                    <select style="width:160px" name="new_second_kind_id" id="secondKindId" size="1" class="SELECT_STYLE2">
-                        @*<option value="0">-----请选择-----</option>
-                        @foreach (DataRow dr in dt3.Rows)
-                        {
-                            <option value=@dr["second_kind_id"]>@dr["second_kind_name"]</option>
-                        }*@
+                    <select style="width:160px" name="new_second_kind_id" id="secondKindId" onchange="SelectSid();" size="1" class="SELECT_STYLE2">
+                        <option value="">-----请选择-----</option>
+                      
                     </select>
                     <input type="hidden" name="new_second_kind_name" id="newSecondKindName">
                 </td>
@@ -311,11 +344,8 @@
                 </td>
                 <td class="TD_STYLE2">
                     <select style="width:160px" name="new_third_kind_id" id="thirdKindId" size="1" class="SELECT_STYLE2">
-                        @*<option value="0">-----请选择-----</option>
-                        @foreach (DataRow dr in dt3.Rows)
-                        {
-                            <option value=@dr["third_kind_id"]>@dr["third_kind_name"]</option>
-                        }*@
+                       <option value="">-----请选择-----</option>
+                       
                     </select>
                     <input type="hidden" name="new_third_kind_name" id="newThirdKindName">
                 </td>
@@ -374,7 +404,7 @@
                     登记人
                 </td>
                 <td class="TD_STYLE2">
-                    <input type="text" name="register" readonly="readonly" value="better_admin"
+                    <input type="text" name="register" readonly="readonly" value=@ViewBag.user
                            class="INPUT_STYLE2">
                 </td>
                 <td class="TD_STYLE1">

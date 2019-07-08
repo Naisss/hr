@@ -7,6 +7,8 @@ using IBLL;
 using IocContianer;
 using System.Data;
 using Newtonsoft.Json;
+using Entity;
+
 namespace UI.Controllers
 {
     public class HomeController : Controller
@@ -17,6 +19,8 @@ namespace UI.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            users u =(users)Session["getuser"];
+            ViewBag.user = u.u_true_name;
             return View();
         }
         public ActionResult Index2()
