@@ -11,7 +11,8 @@ namespace Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    [MetadataType(typeof(second_kindValidate))]
     public partial class config_file_second_kind
     {
         public short fsk_id { get; set; }

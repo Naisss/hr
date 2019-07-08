@@ -10,10 +10,7 @@ using IDao;
 using IBLL;
 using System.Configuration;
 using Microsoft.Practices.Unity.Configuration;
-using IDao;
-using Entity;
-using IBLL;
-using Dao;
+
 
 namespace IocContianer
 {
@@ -21,6 +18,49 @@ namespace IocContianer
 
     public class iocCreate
     {
+
+        public static Igrant_detailsDao<salary_grant_details> grant_details()
+        {
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Igrant_detailsDao<salary_grant_details>, grant_detailsDao>();
+            return ioc.Resolve<Igrant_detailsDao<salary_grant_details>>();
+        }
+        public static I_fileDao<human_file> _file()
+        {
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<I_fileDao<human_file>, _fileDao>();
+            return ioc.Resolve<I_fileDao<human_file>>();
+        }
+
+        // 薪酬发放登记表       
+        public static Isalary_grantDao<salary_grant> _grant()
+        {
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Isalary_grantDao<salary_grant>, salary_grantDao>();
+            return ioc.Resolve<Isalary_grantDao<salary_grant>>();
+        }
+        //薪酬标准登记
+        public static IstandardDao<salary_standard> standardioc()
+        {
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<IstandardDao<salary_standard>, standardDao>();
+            return ioc.Resolve<IstandardDao<salary_standard>>();
+        }
+        //: 薪酬标准单详细信息   
+        public static Istandard_detailsDao<salary_standard_details> standard_detailsioc()
+        {
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Istandard_detailsDao<salary_standard_details>, standard_detailsDao>();
+            return ioc.Resolve<Istandard_detailsDao<salary_standard_details>>();
+        }
+        //公共属性设置
+        public static Ipublic_charDao<config_public_char> public_charDao()
+        {
+            UnityContainer ioc = new UnityContainer();
+            ioc.RegisterType<Ipublic_charDao<config_public_char>, public_charDao>();
+            return ioc.Resolve<Ipublic_charDao<config_public_char>>();
+        }
+
         //发布登记
         public static Imajor_releaseDao<engage_major_release> text01Dao()
         {
@@ -85,14 +125,15 @@ namespace IocContianer
             return ioc.Resolve<T>(bl);
         }
 
-        public static Ifirst_kindDao text01Dao1()
+        public static Ifirst_kindDao<config_file_first_kind> text01Dao1()
         {
 
             UnityContainer ioc = new UnityContainer();
-            ioc.RegisterType<Ifirst_kindDao, first_kindDao>();
-            return ioc.Resolve<Ifirst_kindDao>();
+            ioc.RegisterType<Ifirst_kindDao<config_file_first_kind>, first_kindDao>();
+            return ioc.Resolve<Ifirst_kindDao< config_file_first_kind >> ();
 
         }
+
 
 
 

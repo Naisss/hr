@@ -50,13 +50,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ifirst_kindBLL.cs" />
+    <Compile Include="Igrant_detailsBLL.cs" />
     <Compile Include="ImajorBLL.cs" />
     <Compile Include="Imajor_kindBLL.cs" />
     <Compile Include="Imajor_releaseBLL.cs" />
     <Compile Include="Ipublic_charBLL.cs" />
+    <Compile Include="Isalary_grantBLL.cs" />
     <Compile Include="Isecond_kindBLL.cs" />
+    <Compile Include="IstandardBLL.cs" />
+    <Compile Include="Istandard_detailsBLL.cs" />
     <Compile Include="Ithird_kindBLL.cs" />
     <Compile Include="ILoginBll.cs" />
+    <Compile Include="I_fileBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

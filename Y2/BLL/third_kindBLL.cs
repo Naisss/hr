@@ -7,15 +7,36 @@ using IocContianer;
 using IDao;
 using IBLL;
 using Entity;
+using System.Linq.Expressions;
+
 namespace BLL
 {
     public class third_kindBLL:Ithird_kindBLL
     {
         Ithird_kindDao<config_file_third_kind> i = iocCreate.third_kindDao();
 
+        public int Del(config_file_third_kind t)
+        {
+            return i.Del(t);
+        }
+
+        public int Insert(config_file_third_kind t)
+        {
+            return i.Insert(t);
+        }
+
         public List<config_file_third_kind> Select() {
             return i.SelectAll();
         }
 
+        public List<config_file_third_kind> selectWhere(Expression<Func<config_file_third_kind, bool>> where)
+        {
+            return i.selectWhere(where);
+        }
+
+        public int Update(config_file_third_kind t)
+        {
+            return i.Update(t);
+        }
     }
 }

@@ -14,5 +14,6 @@ namespace IBLL
         int Del(config_file_first_kind t);//删除
         List<config_file_first_kind> selectWhere(Expression<Func<config_file_first_kind, bool>> where);  //通用where条件查询
         int Update(config_file_first_kind t);//修改
+        List<config_file_first_kind> SelectFenYe(Expression<Func<config_file_first_kind, int>> order, Expression<Func<config_file_first_kind, bool>> where, out int rows, int currentPage, int pageSize);
     }
 }

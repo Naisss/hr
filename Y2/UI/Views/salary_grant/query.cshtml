@@ -1,0 +1,150 @@
+﻿@using Entity
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/cwcalendar.css" rel="stylesheet" />
+    <link href="~/css/table.css" rel="stylesheet" />
+    <title>query</title>
+</head>
+<body>
+    @{List<salary_grant_details> list = ViewBag.s["salary_grant_details"]; }
+    @{List<string> sg = ViewBag.ss;}
+    <form method="post" action="salaryGrantAction.do?methodName=doSeatchSalaryGrant">
+        <table width="100%">
+            <tbody>
+                <tr>
+                    <td style="text-align: left">
+                        <font color="black">您正在做的业务是:人力资源管理--薪酬发放管理--薪酬发放复核</font>
+                        <br><br><br>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" style="text-align: left">
+                        薪酬单编号：@list[0].salary_grant_id
+                        <input type="hidden" name="salaryGrant.salaryGrantId" value="HS1353753198460">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: left">
+                        机构：
+
+
+
+                        Ⅰ级结构
+
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left">
+                        本机构总人数:@list.Count
+                        ，基本薪酬总数:@ViewBag.Sum1
+                        ，实发总额:<span id="salarySum_sum">@ViewBag.Sum</span>
+
+                    </td>
+                    <td style="text-align: right">
+
+                        登记人:better_admin 　
+                        登记时间： 2012年11月24日
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table bordercolorlight="#848284" bordercolordark="#eeeeee" class="TABLE_STYLE1" width="100%" cellspacing="1" cellpadding="0" border="1">
+            <tbody>
+                <tr>
+                    <td class="TD_STYLE1">
+                        <span>序号</span>
+                    </td>
+                    <td class="TD_STYLE1">
+                        <span>档案编号</span>
+                    </td>
+                    <td class="TD_STYLE1">
+                        <span>姓名</span>
+                    </td>
+                    <td class="TD_STYLE1">
+                        工资详情
+                    </td>   
+                    @*<td class="TD_STYLE1">
+                        出差补助
+                    </td>
+
+                    <td class="TD_STYLE1">
+                        交通补贴
+                    </td>
+
+                    <td class="TD_STYLE1">
+                        住房补贴
+                    </td>
+
+                    <td class="TD_STYLE1">
+                        基本工资
+                    </td>
+
+                    <td class="TD_STYLE1">
+                        年终奖
+                    </td>
+
+                    <td class="TD_STYLE1">
+                        误餐补助
+                    </td>*@
+
+                    <td class="TD_STYLE1">
+                        奖励金额
+                    </td>
+                    <td class="TD_STYLE1">
+                        销售绩效总额
+                    </td>
+                    <td class="TD_STYLE1">
+                        应扣金额
+                    </td>
+                    <td class="TD_STYLE1">
+                        实发金额
+                    </td>
+
+                </tr>
+
+                @for (int i = 0; i < list.Count; i++)
+                {
+                    //var list2 = (Dictionary<String, object>)ViewBag.c;
+                    //var keys = list2.Keys;
+                    <tr>
+
+                        <td>@(i + Convert.ToInt32(1))</td>
+                        <td>@list[i].human_id<input type="hidden" name="grantDetails0.humanId" value="bt0101010001"></td>
+                        <td>@list[i].human_name<input type="hidden" name="grantDetails0.humanName" value="薪酬标准名称1"></td>
+                        @{List<salary_standard_details> list2 = ViewBag.s["list" + i]; }
+
+                        @*@for (int ii = 0; ii < list2.Count; ii++)
+                        {
+                            <td>@list2[ii].salary</td>
+                        }*@
+                        <td>
+                            <a href='/salary_grant/xq/@sg[i]'>查看薪酬详情</a>
+                        </td>
+                        <td>@list[i].bouns_sum</td>
+                        <td>@list[i].sale_sum</td>
+                        <td>@list[i].deduct_sum</td>
+                        <td>@list[i].salary_paid_sum</td>
+                    </tr>
+                            }
+            </tbody>
+        </table>
+        <br>
+        <center>
+            <input type="button" style="width: 200;height: 50;font-size: 20px;font-weight: bold;border-bottom-style: ridge;cursor: pointer" onclick="javascript:window.history.back();" value="返 回">
+
+        </center>
+
+    </form>
+
+
+</body>
+</html>
